@@ -1,0 +1,29 @@
+:root {
+  /* Arka plan ve yüzey renkleri */
+  --color-bg: #f7f7fb;
+  --color-bg-soft: #ffffff;
+
+  /* Ana renkler (soft, vet kliniği vibes) */
+  --color-primary: #4f46e5;
+  --color-primary-soft: #eef2ff;
+  --color-accent: #22c55e;
+  --color-accent-soft: #dcfce7;
+
+  /* Yazı renkleri */
+  --color-text: #111827;
+  --color-text-soft: #6b7280;
+
+  /* Çerçeve / sınır renkleri */
+  --color-border: #e5e7eb;
+
+  /* Radius ve shadow */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+
+  /* Animasyon hızları */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 250ms ease;
+}
