@@ -40,7 +40,7 @@ button {
 /* Container */
 
 .container {
-  width: min(1120px, 100% - 2rem);
+  width: min(1444px, 100% - 2rem);
   margin-inline: auto;
 }
 

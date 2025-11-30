@@ -27,12 +27,11 @@ export default function Header() {
               İletişim
             </a>
           </div>
-
-          <button className="header-cta-btn">
-            Randevu Al
-            <span>↗</span>
-          </button>
         </nav>
+        <button className="header-cta-btn">
+          Randevu Al
+          <span>↗</span>
+        </button>
       </div>
     </header>
   );
