@@ -1,26 +1,39 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import MainLayout from "./components/layout/MainLayout";
+import MainLayout from "./components/layout/MainLayout.jsx";
 
-// Sayfaların import edilmesi
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Appointment from "./pages/Appointment";
-import Blog from "./pages/Blog";
-import Contact from "./pages/Contact";
+// Sayfalar (Pages)
+import Home from "./pages/Home.jsx";
+import About from "./pages/About.jsx";
+import Appointment from "./pages/Appointment.jsx";
+import Blog from "./pages/Blog.jsx";
+import BlogPost from "./pages/BlogPost/BlogPost.jsx"; // Yeni oluşturacağımız detay sayfası
+import Contact from "./pages/Contact.jsx";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} /> {/* Anasayfa (localhost:5173/) */}
-        <Route path="about" element={<About />} />{" "}
-        {/* Hakkımızda (domain/about) */}
-        <Route path="appointment" element={<Appointment />} />{" "}
-        {/* Randevu (domain/appointment) */}
-        <Route path="blog" element={<Blog />} /> {/* Blog (domain/blog) */}
+        {/* Anasayfa */}
+        <Route index element={<Home />} />
+        {/* Statik Sayfalar */}
+        <Route path="about" element={<About />} />
+        <Route path="appointment" element={<Appointment />} />
         <Route path="contact" element={<Contact />} />
-        {/* İletişim (domain/contact) */}
+        {/* Blog Rotaları */}
+        <Route path="blog" element={<Blog />} /> {/* Tüm yazıların listesi */}
+        <Route path="blog/:id" element={<BlogPost />} />
+        {/* 404 Rotası */}
+        <Route
+          path="*"
+          element={
+            <div
+              className="container"
+              style={{ padding: "5rem", textAlign: "center" }}
+            >
+              Sayfa Bulunamadı (404)
+            </div>
+          }
+        />
       </Route>
     </Routes>
   );

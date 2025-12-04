@@ -1,5 +1,7 @@
 import Hero from "../components/layout/Hero/Hero.jsx";
+import ContactSection from "../components/sections/Contact/ContactSection.jsx";
 import IntroSection from "../components/sections/IntroSecton/IntroSection.jsx";
+import LatestPosts from "../components/sections/LatestPosts/LatestPosts.jsx";
 
 export default function Home() {
   return (
@@ -25,18 +27,9 @@ export default function Home() {
           olacak.
         </p>
       </section>
+      <LatestPosts />
 
-      <section
-        id="contact"
-        className="container"
-        style={{ padding: "3rem 0 4rem" }}
-      >
-        <h2 style={{ marginBottom: "1rem" }}>İletişim</h2>
-        <p style={{ color: "var(--color-text-soft)" }}>
-          Adres, telefon, WhatsApp ve basit bir iletişim formu bu alanda yer
-          alacak.
-        </p>
-      </section>
+      <ContactSection />
     </>
   );
 }

@@ -62,8 +62,9 @@
 .site-nav-links {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
   font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .site-nav-link {
@@ -97,21 +98,31 @@
 .header-cta-btn {
   padding: 0.55rem 1.25rem;
   border-radius: 999px;
-  background: #fff; /* Buton beyaz olsun */
-  color: #4f46e5; /* Yazısı mor */
+  background: #fff;
+  color: #4f46e5;
   font-size: 0.85rem;
   font-weight: 600;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  transition: transform var(--transition-fast),
-    box-shadow var(--transition-fast);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-cta-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background: #4f46e5;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+}
+
+.header-cta-btn span {
+  transition: transform 0.3s ease;
+}
+
+.header-cta-btn:hover span {
+  transform: translateX(3px) rotate(-45deg);
 }
 
 /* Responsive Header */
@@ -122,4 +133,47 @@
   .site-nav-links {
     display: none; /* Mobile menu mantığı sonra eklenecek */
   }
+}
+
+.site-header.header-dark {
+  background: rgba(255, 255, 255, 0.95); /* Arkası beyaz (hafif transparan) */
+  backdrop-filter: blur(10px); /* Buzlu cam efekti */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06); /* Çizgi griye döner */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  position: sticky; /* Diğer sayfalarda absolute yerine sticky daha iyidir */
+}
+
+/* Logo Metinleri */
+.header-dark .site-logo-text-main {
+  color: #1f2937; /* Koyu Gri */
+}
+
+.header-dark .site-logo-text-sub {
+  color: #6b7280; /* Gri */
+}
+
+/* Navigasyon Linkleri */
+.header-dark .site-nav-link {
+  color: #4b5563; /* Koyu Gri */
+}
+
+.header-dark .site-nav-link:hover {
+  color: #4f46e5; /* Hover olunca Mor */
+}
+
+.header-dark .site-nav-link::after {
+  background: #4f46e5; /* Alt çizgi Mor */
+}
+
+/* Buton Stili Değişimi (İç sayfalarda daha belirgin olsun) */
+.header-dark .header-cta-btn {
+  background: #4f46e5; /* Arka plan Mor */
+  color: #ffffff; /* Yazı Beyaz */
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.header-dark .header-cta-btn:hover {
+  background: #4338ca; /* Hoverda daha koyu mor */
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
 }

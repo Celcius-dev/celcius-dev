@@ -1,0 +1,133 @@
+.contact-section {
+  padding: 6rem 0;
+  background-color: #f8fafc; /* Görseldeki bej yerine modern açık gri */
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* GRID YAPISI */
+.contact-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem; /* Harita ile kartlar arası boşluk */
+}
+
+/* KART TASARIMI */
+.contact-card {
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 20px; /* Görseldeki gibi yumuşak köşeler */
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+
+  /* Hover animasyonu için ayarlar */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+
+.contact-card:hover {
+  transform: translateY(-8px); /* Yukarı kalkma efekti */
+  box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.1),
+    0 10px 10px -5px rgba(79, 70, 229, 0.04);
+  border-color: rgba(79, 70, 229, 0.2); /* Kenarlık morlaşır */
+}
+
+/* İKON ALANI */
+.icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1.5rem;
+  background-color: #eef2ff; /* İndigo'nun çok açık tonu */
+  color: #4f46e5; /* Ana İndigo Rengi */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover .icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #334155;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.card-subtext {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+/* HARİTA ALANI */
+.map-container {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 0.5rem; /* Harita etrafında beyaz çerçeve */
+  height: 450px;
+}
+
+.map-container iframe {
+  border-radius: 20px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(
+    10%
+  ); /* Haritayı biraz daha modern göstermek için gri filtre */
+  transition: filter 0.3s ease;
+}
+
+.map-container:hover iframe {
+  filter: grayscale(0%); /* Mouse gelince renklenir */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .contact-section {
+    padding: 4rem 0;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+}
