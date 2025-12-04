@@ -1,0 +1,125 @@
+/* HEADER */
+
+.site-header {
+  position: absolute; /* Değişiklik: Sayfa akışından çıkarıldı */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100; /* Hero'nun ve Videonun üzerinde durması için */
+  background: transparent; /* Değişiklik: Arka plan şeffaf */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Hafif beyaz çizgi */
+  transition: background 0.3s ease;
+}
+
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1rem; /* Biraz daha ferah */
+  /* padding-inline container'dan geleceği için sildim */
+}
+
+/* LOGO */
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.site-logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #a5b4fc, #4f46e5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f9fafb;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+}
+
+.site-logo-text-main {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 0.98rem;
+  color: #fff; /* Video üstünde beyaz görünsün */
+}
+
+.site-logo-text-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7); /* Video üstünde açık gri */
+}
+
+/* NAV */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.9rem;
+}
+
+.site-nav-link {
+  color: rgba(255, 255, 255, 0.85); /* Linkler artık beyaz */
+  position: relative;
+  padding-bottom: 2px;
+  transition: color var(--transition-fast);
+}
+
+.site-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: #fff; /* Alt çizgi beyaz */
+  border-radius: 999px;
+  transition: width var(--transition-fast);
+}
+
+.site-nav-link:hover {
+  color: #ffffff;
+}
+
+.site-nav-link:hover::after {
+  width: 100%;
+}
+
+/* PRIMARY BUTTON (header) */
+.header-cta-btn {
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  background: #fff; /* Buton beyaz olsun */
+  color: #4f46e5; /* Yazısı mor */
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.header-cta-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Header */
+@media (max-width: 900px) {
+  .site-header-inner {
+    gap: 1rem;
+  }
+  .site-nav-links {
+    display: none; /* Mobile menu mantığı sonra eklenecek */
+  }
+}

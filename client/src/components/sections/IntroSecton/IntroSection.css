@@ -1,0 +1,224 @@
+/* INTRO SECTION (Eski Hero) */
+
+.intro-section {
+  /* min-height sildik, artık içerik kadar yer kaplasın */
+  display: flex;
+  align-items: center;
+  padding-block: 4rem 4rem;
+  background-color: var(--color-bg); /* Arka plan rengini garantiye alalım */
+}
+
+.intro-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.intro-LeftPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* Badge */
+.intro-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.intro-badge {
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  color: #4f46e5;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.intro-badge-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background-color: #22c55e;
+  box-shadow: 0 0 0 7px rgba(34, 197, 94, 0.3);
+}
+
+.intro-badge-text {
+  font-size: 0.75rem;
+  color: var(--color-text-soft);
+}
+
+/* Titles & Text */
+.intro-title {
+  font-size: clamp(
+    2.2rem,
+    4vw,
+    2.8rem
+  ); /* Fontu bir tık küçülttüm çünkü artık alt section */
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.intro-title span.highlight {
+  background: linear-gradient(120deg, #4f46e5, #22c55e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.intro-text {
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  max-width: 480px;
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+
+/* Actions */
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.intro-cta-primary,
+.intro-cta-secondary {
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.intro-cta-primary {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #eef2ff;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+}
+
+.intro-cta-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 15px 35px rgba(79, 70, 229, 0.5);
+}
+
+.intro-cta-secondary {
+  background: #ffffff;
+  color: var(--color-text);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.intro-cta-secondary:hover {
+  background: #f9fafb;
+  border-color: #94a3b8;
+}
+
+/* Meta */
+.intro-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.8rem;
+}
+
+.intro-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-text-soft);
+}
+
+/* Right Side Visual */
+.intro-visual-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-card {
+  width: 100%;
+  max-width: 360px;
+  border-radius: 32px;
+  padding: 1.4rem 1.4rem 1.2rem;
+  background: radial-gradient(circle at top left, #eef2ff, #ffffff);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Avatar & Tags */
+.intro-pet-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 24px;
+  background: radial-gradient(circle at 30% 30%, #fed7aa, #fb7185);
+  margin-bottom: 1rem;
+}
+
+.intro-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--color-text);
+}
+
+.intro-card-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+  margin-bottom: 1rem;
+}
+
+.intro-card-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.intro-card-tag {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(79, 70, 229, 0.06);
+  color: #4f46e5;
+}
+
+.intro-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--color-text-soft);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .intro-inner {
+    grid-template-columns: minmax(0, 1fr);
+    text-align: center; /* Mobilde ortaladık */
+  }
+
+  .intro-visual-wrapper {
+    order: -1; /* Görseli üste al */
+    margin-bottom: 2rem;
+  }
+
+  .intro-badge-row,
+  .intro-actions,
+  .intro-meta {
+    justify-content: center;
+  }
+}

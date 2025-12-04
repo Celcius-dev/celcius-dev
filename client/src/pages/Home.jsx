@@ -1,11 +1,11 @@
-import Hero from "../components/layout/Hero.jsx";
+import Hero from "../components/layout/Hero/Hero.jsx";
+import IntroSection from "../components/sections/IntroSecton/IntroSection.jsx";
 
 export default function Home() {
   return (
     <>
       <Hero />
-
-      {/* Şimdilik placeholder sectionlar, ileride dolduracağız */}
+      <IntroSection />
       <section
         id="services"
         className="container"
