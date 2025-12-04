@@ -1,12 +1,19 @@
 import "./Header.css";
+import VetLogo from "../../../assets/AnimatedVetLogo.svg";
+
 export default function Header() {
   return (
     <header className="site-header">
       <div className="container site-header-inner">
         <div className="site-logo">
-          <div className="site-logo-mark">VC</div>
+          <img
+            src={VetLogo}
+            alt="VetCare Logo"
+            className="site-logo-svg"
+            style={{ width: "60px", height: "auto", marginRight: "10px" }}
+          />
           <div>
-            <div className="site-logo-text-main">VetCare Clinic</div>
+            <div className="site-logo-text-main">Celcius Clinic</div>
             <div className="site-logo-text-sub">
               Modern veterinary & pet wellness
             </div>
