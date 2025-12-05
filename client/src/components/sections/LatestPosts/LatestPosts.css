@@ -1,6 +1,6 @@
 .latest-posts-section {
   padding: 5rem 0;
-  background-color: #ffffff; /* Beyaz zemin */
+  background-color: var(--color-bg-surface); /* Beyaz Zemin */
 }
 
 .section-header {
@@ -8,7 +8,6 @@
   margin-bottom: 3rem;
 }
 
-/* Grid Yapısı: PC'de 4 sütun, Tablette 2, Mobilde 1 */
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -18,68 +17,61 @@
 
 /* Kart Tasarımı */
 .post-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   padding: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 250px; /* Kartların boyunu eşitlemek için */
+  min-height: 250px;
   position: relative;
   overflow: hidden;
 }
 
-/* Hover Efekti: Kart yukarı kalkar ve gölge oluşur */
 .post-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  border-color: #c7d2fe; /* Açık mor kenarlık */
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
 }
 
-/* Tarih */
 .post-date {
   font-size: 0.8rem;
-  color: #6b7280;
-  font-weight: 500;
+  color: var(--color-text-light);
+  font-weight: 600;
   margin-bottom: 0.75rem;
   display: block;
 }
 
-/* Başlık */
 .post-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--color-text-main);
   margin-bottom: 0.75rem;
   line-height: 1.4;
-  transition: color 0.3s ease;
+  transition: color 0.2s;
 }
 
 .post-card:hover .post-title {
-  color: #4f46e5; /* Hoverda başlık mor olur */
+  color: var(--color-primary);
 }
 
-/* Özet Metni */
 .post-summary {
   font-size: 0.9rem;
-  color: #4b5563;
+  color: var(--color-text-secondary);
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  flex-grow: 1; /* Butonu en alta itmek için */
+  flex-grow: 1;
 }
 
-/* "Devamını Oku" Linki */
+/* Read More Butonu */
 .read-more-btn {
-  background: none;
-  border: none;
-  color: #4f46e5;
+  color: var(--color-primary);
   font-size: 0.85rem;
   font-weight: 600;
   padding: 0;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -87,10 +79,11 @@
 }
 
 .post-card:hover .read-more-btn {
-  gap: 8px; /* Ok işareti sağa kayar */
+  gap: 8px;
+  color: var(--color-primary-hover);
 }
 
-/* Tümünü Gör Butonu Alanı */
+/* Tümünü Gör */
 .view-all-container {
   text-align: center;
   margin-top: 2rem;
@@ -99,28 +92,27 @@
 .view-all-btn {
   padding: 0.75rem 2rem;
   background-color: transparent;
-  border: 2px solid #e5e7eb;
-  border-radius: 999px;
-  color: #6b7280;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .view-all-btn:hover {
-  border-color: #4f46e5;
-  color: #4f46e5;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
   .posts-grid {
-    grid-template-columns: repeat(2, 1fr); /* Tablette 2'li */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
-
 @media (max-width: 640px) {
   .posts-grid {
-    grid-template-columns: 1fr; /* Mobilde tekli */
+    grid-template-columns: 1fr;
   }
 }

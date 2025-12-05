@@ -53,18 +53,14 @@ const BlogPost = () => {
   return (
     <article className="blog-post-page">
       <div className="blog-container">
-        {/* Geri Dön Linki */}
         <div className="back-link" onClick={() => navigate("/")}>
           ← Anasayfaya Dön
         </div>
-
-        {/* Başlık ve Tarih */}
         <header className="post-header">
           <span className="post-date">{formatDate(post.createdAt)}</span>
           <h1 className="post-title-main">{post.title}</h1>
         </header>
 
-        {/* --- GÖRSEL ALANI --- */}
         {post.image && (
           <div className="post-image-container">
             <img
@@ -75,11 +71,10 @@ const BlogPost = () => {
           </div>
         )}
 
-        {/* İçerik */}
         <div className="post-content">{post.content}</div>
 
         {/* --- NAVİGASYON BUTONLARI --- */}
-        {/* Değişkenler burada kullanılıyor */}
+
         <nav className="post-navigation">
           {/* Önceki Post Varsa Göster */}
           {prevPost ? (
