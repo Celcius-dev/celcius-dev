@@ -1,0 +1,127 @@
+.contact-section {
+  padding: 6rem 0;
+  background-color: var(--color-bg-body); /* Gri zemin */
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* GRID YAPISI */
+.contact-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+/* KART TASARIMI */
+.contact-card {
+  background: var(--color-bg-surface);
+  padding: 2.5rem 2rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+
+  /* Animasyon */
+  transition: var(--transition-normal);
+  cursor: default;
+}
+
+.contact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-primary); /* Glow Efekti */
+  border-color: var(--color-primary);
+}
+
+/* İKON ALANI */
+.icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1.5rem;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-normal);
+}
+
+.contact-card:hover .icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: var(--color-text-main);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.card-subtext {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+/* HARİTA ALANI */
+.map-container {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--color-bg-surface);
+  padding: 0.5rem;
+  height: 450px;
+}
+
+.map-container iframe {
+  border-radius: var(--radius-md);
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(10%);
+  transition: filter 0.3s ease;
+}
+
+.map-container:hover iframe {
+  filter: grayscale(0%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  .contact-section {
+    padding: 4rem 0;
+  }
+  .map-container {
+    height: 300px;
+  }
+}

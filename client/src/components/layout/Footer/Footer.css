@@ -1,0 +1,171 @@
+.site-footer {
+  background-color: #111827; /* Çok koyu gri (neredeyse siyah) */
+  color: #9ca3af; /* Açık gri metinler */
+  padding: 5rem 0 2rem;
+  font-size: 0.95rem;
+  margin-top: auto; /* Footer'ı sayfa dibine iter */
+}
+
+/* GRİD YAPISI */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr; /* 1. kolon daha geniş */
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+/* BAŞLIKLAR */
+.footer-title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* 1. KOLON (LOGO & AÇIKLAMA) */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.footer-desc {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 300px;
+}
+
+/* SOSYAL MEDYA */
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #1f2937; /* Kutu rengi */
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #4f46e5; /* Marka Rengi (İndigo) */
+  transform: translateY(-3px);
+}
+
+/* LİNKLER */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  padding-left: 5px; /* Hover'da sağa kayma efekti */
+}
+
+/* İLETİŞİM KOLONU */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: #d1d5db;
+}
+
+.working-hours {
+  background-color: #1f2937;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid #4f46e5;
+}
+
+.wh-title {
+  color: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.working-hours p {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.working-hours .closed {
+  color: #ef4444; /* Kırmızı */
+}
+
+/* ALT ÇİZGİ (COPYRIGHT) */
+.footer-bottom {
+  border-top: 1px solid #374151;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-legal a {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover {
+  color: #fff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .footer-top {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 kolon */
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-top {
+    grid-template-columns: 1fr; /* Mobil: Tek kolon */
+    gap: 2.5rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
