@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
-import VetLogo from "../../../assets/AnimatedVetLogo.svg"; // Logoyu buradan çekiyoruz
+import Logo from "../../../assets/logo/logo.svg?react"; // Logoyu buradan çekiyoruz
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,18 +14,8 @@ const Footer = () => {
           {/* 1. KOLON: Marka & Hakkında */}
           <div className="footer-col brand-col">
             <Link to="/" className="footer-logo">
-              <img
-                src={VetLogo}
-                alt="VetCare Logo"
-                style={{ height: "40px", width: "auto" }}
-              />
-              <span>VetCare</span>
+              <Logo className="footer-logo-svg" />
             </Link>
-            <p className="footer-desc">
-              Evcil dostlarınızın sağlığı ve mutluluğu bizim önceliğimizdir.
-              Modern tıbbın imkanlarıyla, sevgi dolu bir ortamda hizmet
-              veriyoruz.
-            </p>
             <div className="social-links">
               <a href="#" aria-label="Instagram" className="social-icon">
                 <svg

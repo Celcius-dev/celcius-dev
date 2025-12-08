@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import "./Header.css";
-import VetLogo from "../../../assets/AnimatedVetLogo.svg";
+import Logo from "../../../assets/logo/logo.svg?react";
 
 export default function Header() {
   const location = useLocation();
@@ -10,7 +10,7 @@ export default function Header() {
   // Anasayfada mıyız kontrolü
   const isHome = location.pathname === "/";
 
-  // Scroll olayını dinle (Opsiyonel ama şık durur: aşağı inince header beyazlaşsın)
+  // Scroll olayını dinle
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -18,9 +18,6 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Hangi sınıfları kullanacağız?
-  // Eğer anasayfa değilse VEYA scroll yapıldıysa "header-dark" olsun
   const headerClass = `site-header ${
     !isHome || isScrolled ? "header-dark" : ""
   }`;
@@ -29,20 +26,10 @@ export default function Header() {
     <header className={headerClass}>
       <div className="container site-header-inner">
         {/* LOGO */}
-        <div className="site-logo">
-          <img
-            src={VetLogo}
-            alt="VetCare Logo"
-            className="site-logo-svg"
-            style={{ width: "60px", height: "auto", marginRight: "10px" }}
-          />
-          <div>
-            <div className="site-logo-text-main">VetCare Clinic</div>
-            <div className="site-logo-text-sub">
-              Modern veterinary & pet wellness
-            </div>
-          </div>
-        </div>
+
+        <Link to="/" className="site-logo" aria-label="VetCare Anasayfa">
+          <Logo className="site-logo-svg" />
+        </Link>
 
         {/* NAV */}
         <nav className="site-nav">
