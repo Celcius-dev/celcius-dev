@@ -32,8 +32,11 @@
   font-weight: 700;
   text-decoration: none;
   margin-bottom: 1rem;
+  justify-content: center;
 }
-
+.footer-logo-svg {
+  width: 300px;
+}
 .footer-desc {
   line-height: 1.6;
   margin-bottom: 1.5rem;
@@ -44,6 +47,7 @@
 .social-links {
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 
 .social-icon {

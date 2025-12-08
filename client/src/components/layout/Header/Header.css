@@ -34,6 +34,7 @@
 /* SVG Logo (Eğer img kullanıyorsan bu class img'ye verilir) */
 .site-logo-svg {
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  width: 180px;
 }
 
 .site-logo-text-main {
