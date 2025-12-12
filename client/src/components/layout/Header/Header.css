@@ -1,5 +1,5 @@
 /* =========================================
-   HEADER MAIN (TRANSPARENT STATE)
+   HEADER MAIN (SHARED)
    ========================================= */
 .site-header {
   position: absolute; /* Anasayfada Hero'nun üstünde */
@@ -9,9 +9,9 @@
   z-index: 100;
   background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* Geçiş Efektleri */
   transition: background var(--transition-normal),
-    border-color var(--transition-normal), padding var(--transition-normal),
-    box-shadow var(--transition-normal);
+    border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 .site-header-inner {
@@ -19,46 +19,34 @@
   align-items: center;
   justify-content: space-between;
   padding-block: 1rem;
-  height: 94px;
+  height: 94px; /* Yüksekliği sabitledik */
 }
 
-/* =========================================
-   LOGO
-   ========================================= */
+/* LOGO */
 .site-logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 101; /* Mobilde de en üstte kalsın */
 }
 
-/* SVG Logo (Eğer img kullanıyorsan bu class img'ye verilir) */
 .site-logo-svg {
+  height: 150px; /* Genişlik yerine yükseklik vermek bozulmayı önler */
+  width: auto;
+  transition: all 0.3s ease;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-  width: 180px;
 }
 
-.site-logo-text-main {
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  font-size: 1.1rem; /* Font değiştiği için biraz büyüttük */
-  color: var(--color-text-white);
-  line-height: 1.2;
-}
-
-.site-logo-text-sub {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 400;
+/* Varsayılan (Şeffaf Header): Logo Beyaz */
+.site-logo-svg path {
+  transition: fill 0.3s ease;
 }
 
 /* =========================================
-   NAVIGASYON
+   DESKTOP NAV & ACTIONS
    ========================================= */
-.site-nav {
-  display: flex;
-  align-items: center;
-}
-
 .site-nav-links {
   display: flex;
   align-items: center;
@@ -71,44 +59,35 @@
   color: rgba(255, 255, 255, 0.9);
   position: relative;
   padding-bottom: 4px;
-  /* Link rengi değişimi için geçiş */
   transition: color var(--transition-normal);
 }
 
 .site-nav-link::after {
   content: "";
   position: absolute;
-  left: 0; /* Soldan başlaması için */
+  left: 0;
   bottom: 0;
   height: 2px;
-  width: 0; /* Başlangıç genişliği 0 */
-
-  /* Header şeffafken beyaz çizgi */
+  width: 0;
   background: var(--color-text-white);
   border-radius: var(--radius-full);
-
-  /* --- DÜZELTME BURADA --- */
-  /* 'width' kelimesini sildik. Artık değişkenin içindeki 'all' çalışacak */
   transition: var(--transition-normal);
 }
 
-/* Hover olunca genişlik %100 olsun */
+.site-nav-link:hover {
+  color: var(--color-text-white);
+}
+
 .site-nav-link:hover::after {
   width: 100%;
 }
 
-/* Hover olunca yazı rengi değişsin */
-.site-nav-link:hover {
-  color: var(--color-text-white);
-}
-/* =========================================
-   BUTTON (DEFAULT / TRANSPARENT HEADER)
-   ========================================= */
+/* BUTON (Desktop) */
 .header-cta-btn {
   padding: 0.6rem 1.4rem;
   border-radius: var(--radius-full);
-  background: var(--color-bg-surface); /* Beyaz */
-  color: var(--color-primary); /* İndigo Yazı */
+  background: var(--color-bg-surface);
+  color: var(--color-primary);
   font-size: 0.9rem;
   font-weight: 700;
   box-shadow: var(--shadow-sm);
@@ -117,13 +96,13 @@
   gap: 0.5rem;
   cursor: pointer;
   transition: var(--transition-normal);
+  border: none;
 }
 
 .header-cta-btn:hover {
   transform: translateY(-2px);
   background: var(--color-primary);
   color: var(--color-text-white);
-  /* Özel Glow Efekti (Shadow Primary değişkenini kullandık) */
   box-shadow: var(--shadow-primary);
 }
 
@@ -136,65 +115,172 @@
 }
 
 /* =========================================
-   HEADER DARK MODE (SCROLLED / INNER PAGES)
+   MOBILE ELEMENTS (Burger & Modal)
+   ========================================= */
+
+/* Burger Butonu (Masaüstünde Gizli) */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  color: #ffffff; /* Şeffaf headerda beyaz */
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 102;
+  border: none;
+  transition: var(--transition-normal);
+}
+
+/* Mobil Menü Katmanı (Overlay) */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-bg-surface); /* Beyaz Zemin */
+  z-index: 101; /* Header'ın üstünde */
+
+  /* Animasyon: Sağdan Sola Kayma */
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Menü Açıkken */
+.mobile-menu-overlay.open {
+  transform: translateX(0);
+}
+
+/* Mobil Menü Üst Kısım */
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  height: 94px; /* Header ile aynı yükseklik */
+}
+
+/* Mobilde Logo (Beyaz zemin olduğu için Renkli olmalı) */
+.mobile-logo-svg {
+  height: 100px;
+  width: auto;
+}
+.mobile-logo-svg path {
+  fill: var(--color-primary);
+}
+
+.mobile-close-btn {
+  color: var(--color-text-main);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Mobil İçerik */
+.mobile-menu-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+}
+
+/* Mobil Linkler */
+.mobile-nav {
+  display: flex;
+  margin-top: 120px;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobile-nav a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.5rem;
+  width: fit-content;
+  transition: var(--transition-normal);
+}
+
+.mobile-nav a:hover {
+  color: var(--color-primary);
+  padding-left: 10px; /* Sağa kayma efekti */
+}
+
+/* Mobil Buton (En Altta) */
+.mobile-menu-footer {
+  margin-top: auto;
+  padding-top: 3rem;
+}
+
+.mobile-cta {
+  width: 100%;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   HEADER DARK MODE (SCROLLED)
    ========================================= */
 .site-header.header-dark {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
-  position: sticky; /* Sticky yaparak kullanıcıyla hareket etmesini sağladık */
+  position: sticky;
 }
 
-/* Logo Metinleri Renk Değişimi */
-.header-dark .site-logo-text-main {
-  color: var(--color-text-main);
+/* Dark Mod Renk Ayarları */
+.header-dark .site-logo-svg path {
+  fill: var(--color-primary); /* Logo Renkli */
 }
-
-.header-dark .site-logo-text-sub {
-  color: var(--color-text-secondary);
-}
-
-/* Nav Linkleri Renk Değişimi */
 .header-dark .site-nav-link {
-  color: var(--color-text-secondary);
+  color: var(--color-text-secondary); /* Linkler Gri */
 }
-
 .header-dark .site-nav-link:hover {
   color: var(--color-primary);
 }
-
 .header-dark .site-nav-link::after {
   background: var(--color-primary);
 }
-
-/* Buton Stili Değişimi (İç Sayfalarda Daha Belirgin) */
+.header-dark .mobile-menu-btn {
+  color: var(--color-text-main); /* Burger butonu koyu renk */
+}
 .header-dark .header-cta-btn {
   background: var(--color-primary);
   color: var(--color-text-white);
-  box-shadow: var(--shadow-primary);
-}
-
-.header-dark .header-cta-btn:hover {
-  background: var(--color-primary-hover);
-  box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.4);
 }
 
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE (MEDIA QUERIES)
    ========================================= */
 @media (max-width: 900px) {
+  /* Masaüstü Nav ve Butonu Gizle */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Mobil Burger Butonunu Göster */
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  /* Header Yüksekliği Mobilde Biraz Azalabilir */
   .site-header-inner {
     padding-block: 0.8rem;
+    height: 70px;
   }
 
-  .site-nav-links {
-    display: none; /* Mobile Menu mantığı henüz yok */
-  }
-
-  /* Mobilde buton biraz küçülsün */
-  .header-cta-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
+  .site-logo-svg {
+    height: 100px; /* Logo biraz daha küçük */
   }
 }

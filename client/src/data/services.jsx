@@ -1,9 +1,26 @@
+// src/data/services.jsx
+
 export const services = [
   {
     id: 1,
     title: "Genel Muayene",
     description:
       "Evcil dostunuzun genel sağlık durumunun kontrolü, erken teşhis ve koruyucu hekimlik uygulamaları.",
+    // YENİ EKLENENLER:
+    image:
+      "https://images.unsplash.com/photo-1628009368231-76033527212e?auto=format&fit=crop&q=80&w=800&h=500",
+    content: `
+      <p>Evcil dostlarınızın sağlıklı ve uzun bir ömür sürmesi için düzenli genel muayeneler hayati önem taşır. Kliniğimizde genel muayene kapsamında, burun ucundan kuyruk ucuna kadar detaylı bir fiziksel kontrol gerçekleştiriyoruz.</p>
+      <h3>Muayene Kapsamımız:</h3>
+      <ul>
+        <li>Göz, kulak ve ağız içi kontrolleri</li>
+        <li>Kalp ve akciğer dinlemesi (Oskültasyon)</li>
+        <li>Lenf yumrularının kontrolü</li>
+        <li>Deri ve tüy sağlığı analizi</li>
+        <li>Kilo ve vücut kondisyon skoru takibi</li>
+      </ul>
+      <p>Erken teşhis, birçok hastalığın tedavisinde başarı oranını %90 artırmaktadır. Bu nedenle yılda en az iki kez genel kontrol önermekteyiz.</p>
+    `,
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -25,6 +42,14 @@ export const services = [
     title: "Aşı Takvimi",
     description:
       "Yavru ve yetişkin kedi/köpekler için parazit uygulamaları ve yıllık karma aşı takibi.",
+    image:
+      "https://images.unsplash.com/photo-1599443015574-be5fe8a05783?auto=format&fit=crop&q=80&w=800&h=500",
+    content: `
+      <p>Aşılar, evcil hayvanlarınızı ölümcül viral hastalıklara karşı korumanın en etkili yoludur. Kliniğimizde, Dünya Veteriner Hekimleri Birliği (WSAVA) standartlarına uygun aşı protokolleri uygulanmaktadır.</p>
+      <h3>Uyguladığımız Aşılar:</h3>
+      <p>Kedi ve köpekler için Kuduz, Karma, Bronşin (Kennel Cough), Lösemi ve diğer temel aşılar, hastanızın yaşam tarzına ve yaşına göre planlanır.</p>
+      <p>Ayrıca iç ve dış parazit uygulamaları ile hem dostunuzu hem de sizi zoonoz hastalıklardan koruyoruz. Aşı zamanı geldiğinde SMS ile hatırlatma sistemimiz devreye girmektedir.</p>
+    `,
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -47,6 +72,18 @@ export const services = [
     title: "Cerrahi Operasyonlar",
     description:
       "Kısırlaştırma, yumuşak doku cerrahisi ve ortopedik operasyonlar steril ameliyathanemizde yapılır.",
+    image:
+      "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&q=80&w=800&h=500",
+    content: `
+      <p>Cerrahi müdahaleler, sterilizasyonun en üst düzeyde tutulduğu ameliyathanemizde, gaz anestezi cihazları ve vital monitörler eşliğinde yapılmaktadır.</p>
+      <h3>Cerrahi Hizmetlerimiz:</h3>
+      <ul>
+        <li>Kısırlaştırma (Ovariohisterektomi / Kastrasyon)</li>
+        <li>Yumuşak doku cerrahisi (Tümör, yara onarımı vb.)</li>
+        <li>Ortopedik operasyonlar (Kırık, çıkık tedavileri)</li>
+      </ul>
+      <p>Operasyon öncesi hemogram ve biyokimya testleri ile anestezi riskini minimuma indiriyor, operasyon sonrası yoğun bakım ünitemizde uyanma sürecini takip ediyoruz.</p>
+    `,
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -71,6 +108,12 @@ export const services = [
     title: "Ağız ve Diş Sağlığı",
     description:
       "Diş taşı temizliği (detertraj), diş çekimi ve diş eti hastalıklarının tedavisi.",
+    image:
+      "https://images.unsplash.com/photo-1596272875729-ed2ff7d6d9c5?auto=format&fit=crop&q=80&w=800&h=500",
+    content: `
+      <p>Ağız kokusu sadece kozmetik bir sorun değil, ciddi sağlık problemlerinin habercisi olabilir. Diş eti hastalıkları, bakterilerin kana karışarak kalp ve böbrek gibi organlara zarar vermesine neden olabilir.</p>
+      <p>Ultrasonik kavitron cihazımız ile diş minelerine zarar vermeden diş taşı temizliği (detertraj) ve polisaj işlemi uyguluyoruz. Ayrıca çekilmesi gereken dişler için cerrahi müdahale imkanımız bulunmaktadır.</p>
+    `,
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +135,19 @@ export const services = [
     title: "Laboratuvar",
     description:
       "Hemogram, biyokimya ve idrar analizleri ile hastalıkların hızlı ve doğru tanısı.",
+    image:
+      "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=800&h=500",
+    content: `
+      <p>Doğru teşhis, doğru tedavinin anahtarıdır. Kliniğimiz bünyesindeki laboratuvarımızda sonuçları dakikalar içinde alarak vakit kaybetmeden tedaviye başlıyoruz.</p>
+      <h3>Laboratuvar İmkanları:</h3>
+      <ul>
+        <li>Hemogram (Tam Kan Sayımı)</li>
+        <li>Biyokimya (Karaciğer, Böbrek vb. organ fonksiyonları)</li>
+        <li>Mikroskobik İncelemeler (Deri kazıntısı, kulak akıntısı)</li>
+        <li>Hızlı Test Kitleri (Viral hastalıklar için)</li>
+        <li>İdrar Analizi</li>
+      </ul>
+    `,
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +173,12 @@ export const services = [
     title: "Mikroçip & Pasaport",
     description:
       "Yasal zorunluluk olan mikroçip uygulaması ve uluslararası pet pasaportu düzenlenmesi.",
+    image:
+      "https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?auto=format&fit=crop&q=80&w=800&h=500",
+    content: `
+      <p>5199 sayılı Hayvanları Koruma Kanunu gereğince evcil hayvanların mikroçip ile kayıt altına alınması yasal bir zorunluluktur.</p>
+      <p>Kliniğimizde steril enjektörler içerisinde gelen pirinç tanesi büyüklüğündeki mikroçipler, saniyeler içinde deri altına uygulanır. Bu işlem ağrısızdır ve anestezi gerektirmez. Uygulama sonrası Tarım ve Orman Bakanlığı sistemine (PETVET) kaydınız yapılır ve Uluslararası Pet Pasaportunuz düzenlenir.</p>
+    `,
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

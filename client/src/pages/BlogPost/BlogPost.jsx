@@ -53,8 +53,13 @@ const BlogPost = () => {
   return (
     <article className="blog-post-page">
       <div className="blog-container">
-        <div className="back-link" onClick={() => navigate("/")}>
-          ← Anasayfaya Dön
+        <div className="blog-navigation-top">
+          <div className="back-link" onClick={() => navigate("/")}>
+            ← Anasayfa
+          </div>
+          <div className="back-link" onClick={() => navigate("/blog")}>
+            ← Blog Listesi
+          </div>
         </div>
         <header className="post-header">
           <span className="post-date">{formatDate(post.createdAt)}</span>

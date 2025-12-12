@@ -1,0 +1,232 @@
+/* src/pages/About/About.css */
+
+.about-page {
+  /* Banner header'ın altına gireceği için üst boşluğu sıfırladık */
+  padding: 0 0 6rem;
+  background-color: var(--color-bg-body);
+  min-height: 100vh;
+}
+
+/* --- YENİ HERO BANNER ALANI --- */
+.about-banner {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* Ekranın %60'ı kadar yükseklik */
+  min-height: 400px;
+  max-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 4rem;
+  overflow: hidden;
+}
+
+/* Banner Arka Plan Resmi */
+.about-banner-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Karartma Katmanı (Overlay) - Yazı okunsun diye */
+.about-banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(16, 115, 110, 0.4),
+    /* Marka rengi tint */ rgba(0, 0, 0, 0.7) /* Altta koyulaşan siyah */
+  );
+  z-index: 2;
+}
+
+/* Banner İçeriği */
+.about-banner-content {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  padding: 0 1.5rem;
+  /* Header payı (Header fixed olduğu için içeriği biraz aşağı itelim) */
+  margin-top: 60px;
+}
+
+.about-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff; /* Beyaz */
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.about-desc {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9); /* Hafif transparan beyaz */
+  font-weight: 500;
+}
+
+/* --- VİZYON & MİSYON --- */
+.vision-mission-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 6rem;
+  margin-top: -3rem; /* Banner'ın üzerine hafif binsin (Modern efekt) */
+  position: relative;
+  z-index: 4;
+}
+
+.vm-card {
+  background: var(--color-bg-surface);
+  padding: 3rem 2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  transition: var(--transition-normal);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Daha belirgin gölge */
+}
+
+.vm-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.vm-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.vm-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 1rem;
+}
+
+.vm-text {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* --- EKİBİMİZ (GRID) --- */
+.team-section {
+  margin-top: 6rem;
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.team-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  margin-bottom: 0.5rem;
+}
+
+.team-subtitle {
+  color: var(--color-text-secondary);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+/* --- EKİP KARTI --- */
+.team-card {
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  transition: var(--transition-normal);
+  text-align: center;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.team-img-wrapper {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.team-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: grayscale(20%);
+}
+
+.team-card:hover .team-img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.team-info {
+  padding: 1.5rem;
+}
+
+.team-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 0.25rem;
+}
+
+.team-role {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .about-banner {
+    height: 50vh;
+    min-height: 350px;
+  }
+
+  .about-title {
+    font-size: 2.5rem;
+  }
+
+  .vision-mission-section {
+    grid-template-columns: 1fr;
+    margin-top: 0; /* Mobilde üstüne binme efektini kaldır */
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .team-img-wrapper {
+    height: 200px;
+  }
+}

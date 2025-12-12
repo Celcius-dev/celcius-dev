@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./IntroSection.css";
+// Veri dosyasını import ediyoruz
+import { patients } from "../../../data/patients";
 
 export default function IntroSection() {
+  // Rastgele hasta seçimi için State
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Component yüklendiğinde çalışır
+    const fetchRandomPatient = async () => {
+      setLoading(true);
+
+      // Gerçekçilik hissi için yarım saniye bekletiyoruz (isteğe bağlı)
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Rastgele bir index seç
+      const randomIndex = Math.floor(Math.random() * patients.length);
+      setSelectedPatient(patients[randomIndex]);
+
+      setLoading(false);
+    };
+
+    fetchRandomPatient();
+  }, []);
+
   return (
     <section className="intro-section" id="intro">
       <div className="container intro-inner">
-        {/* SOL TARAF */}
+        {/* SOL TARAF (Senin Metinlerin Aynen Korundu) */}
         <div className="intro-LeftPanel">
           <div className="intro-badge-row">
             <div className="intro-badge">
@@ -46,27 +70,61 @@ export default function IntroSection() {
           </div>
         </div>
 
-        {/* SAĞ TARAF */}
+        {/* SAĞ TARAF (Artık Dinamik) */}
         <div className="intro-visual-wrapper">
-          <div className="intro-card">
-            <div className="intro-pet-avatar" />
-            <div className="intro-card-title">Mia - Düzenli Aşı Takibi</div>
-            <div className="intro-card-subtitle">
-              2 yaşında Scottish Fold, dijital aşı kartı ve randevu hatırlatıcı
-              ile takip ediliyor.
+          {loading ? (
+            // Yüklenirken gösterilecek geçici kart
+            <div
+              className="intro-card"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "350px",
+              }}
+            >
+              <p style={{ color: "var(--color-text-secondary)" }}>
+                Hasta verisi yükleniyor...
+              </p>
             </div>
+          ) : (
+            selectedPatient && (
+              <div className="intro-card">
+                {/* Avatar: Artık img etiketi ve dinamik src */}
+                <img
+                  src={selectedPatient.image}
+                  alt={selectedPatient.name}
+                  className="intro-pet-avatar"
+                />
 
-            <div className="intro-card-tag-list">
-              <span className="intro-card-tag">Aşı Takvimi</span>
-              <span className="intro-card-tag">Kan Tahlili</span>
-              <span className="intro-card-tag">Dijital Kayıt</span>
-            </div>
+                {/* İsim ve Tedavi */}
+                <div className="intro-card-title">
+                  {selectedPatient.name} - {selectedPatient.treatment}
+                </div>
 
-            <div className="intro-card-footer">
-              <span>Son kontrol: 2 hafta önce</span>
-              <span>Bir sonraki: 12 Mart</span>
-            </div>
-          </div>
+                {/* Açıklama */}
+                <div className="intro-card-subtitle">
+                  {selectedPatient.age} {selectedPatient.breed},{" "}
+                  {selectedPatient.description}
+                </div>
+
+                {/* Etiketler (Map ile dönüyoruz) */}
+                <div className="intro-card-tag-list">
+                  {selectedPatient.tags.map((tag, index) => (
+                    <span key={index} className="intro-card-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Footer Bilgileri */}
+                <div className="intro-card-footer">
+                  <span>Son kontrol: {selectedPatient.lastVisit}</span>
+                  <span>Bir sonraki: {selectedPatient.nextVisit}</span>
+                </div>
+              </div>
+            )
+          )}
         </div>
       </div>
     </section>
