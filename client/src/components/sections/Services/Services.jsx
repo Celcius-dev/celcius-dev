@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "./Services.css";
 
 // GEÇİCİ VERİ (Backend bağlanınca bu importu kaldırabilirsin)
-// State ismiyle çakışmasın diye 'staticServices' olarak adlandırdık
 import { services as staticServices } from "../../../data/services";
 
 const ServicesSection = () => {
@@ -108,7 +107,7 @@ const ServicesSection = () => {
               <h3 className="service-title">{service.title}</h3>
               <p className="service-desc">{service.description}</p>
 
-              {/* a href yerine React Router Link kullanımı daha performanslıdır */}
+              {/* Detay sayfasına yönlendirme */}
               <Link to={`/services/${service.id}`} className="service-link">
                 Detaylı Bilgi <span className="arrow">→</span>
               </Link>

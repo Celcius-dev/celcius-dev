@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import "./About.css";
 
 // Veri importu
@@ -41,7 +42,14 @@ const About = () => {
 
   return (
     <div className="about-page">
-      {/* --- YENİ HERO BANNER ALANI --- */}
+      {/* SEO META ETİKETLERİ */}
+      <Helmet>
+        <title>Hakkımızda & Hekim Kadromuz | VetCare Clinic</title>
+        <meta
+          name="description"
+          content="VetCare Clinic'in uzman veteriner hekim kadrosu ile tanışın. 2010'dan beri modern tıbbi altyapımız ve sevgi dolu yaklaşımımızla dostlarınızın yanındayız."
+        />
+      </Helmet>
       <div className="about-banner">
         {/* Arka Plan Resmi */}
         <img

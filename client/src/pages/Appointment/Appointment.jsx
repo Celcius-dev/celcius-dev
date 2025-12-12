@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
+// useLocation import edildi (Veri yakalamak için)
+import { useLocation } from "react-router-dom";
 import "./Appointment.css";
-// Mock Verileri import et
 import { existingAppointments, workingHours } from "../../data/appointments";
+import { Helmet } from "react-helmet-async";
 
 const Appointment = () => {
+  const location = useLocation(); // Gelen veriyi okumak için hook
+
   // --- STATE ---
-  // Varsayılan olarak bugünü seç
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().split("T")[0]
   );
   const [selectedTime, setSelectedTime] = useState(null);
 
-  // ÖNEMLİ GÜNCELLEME: Dolu randevuları State içinde tutuyoruz ki güncelleyebilelim
   const [bookedAppointments, setBookedAppointments] =
     useState(existingAppointments);
 
-  // Form Verileri
   const [formData, setFormData] = useState({
     ownerName: "",
     petName: "",
@@ -23,10 +24,18 @@ const Appointment = () => {
     notes: "",
   });
 
-  // Sayfa açıldığında yukarı kaydır
+  // --- EFEKT: Sayfa Yüklenmesi ve Gelen Veri Kontrolü ---
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+
+    // Eğer ServiceDetail sayfasından 'state' ile bir hizmet adı geldiyse:
+    if (location.state && location.state.serviceName) {
+      setFormData((prev) => ({
+        ...prev,
+        notes: `İlgilenilen Hizmet: ${location.state.serviceName}\n`, // Notlara otomatik ekle
+      }));
+    }
+  }, [location.state]); // location.state değiştiğinde çalışır
 
   // --- MANTIK: SAATLERİ OLUŞTURMA ---
   const generateTimeSlots = () => {
@@ -43,8 +52,7 @@ const Appointment = () => {
 
   const timeSlots = generateTimeSlots();
 
-  // --- MANTIK: DOLULUK KONTROLÜ (GÜNCELLENDİ) ---
-  // Artık statik dosyaya değil, state'e (bookedAppointments) bakıyoruz
+  // --- MANTIK: DOLULUK KONTROLÜ ---
   const isSlotBooked = (time) => {
     return bookedAppointments.some(
       (app) => app.date === selectedDate && app.time === time
@@ -73,14 +81,11 @@ const Appointment = () => {
       return;
     }
 
-    // --- GÜNCELLEME: RANDEVUYU LİSTEYE EKLEME ---
-    // Backend olmadığı için state'i güncelleyerek dolu gibi gösteriyoruz
     const newAppointment = {
       date: selectedDate,
       time: selectedTime,
     };
 
-    // Mevcut dolu listesine yenisini ekle
     setBookedAppointments([...bookedAppointments, newAppointment]);
 
     alert(
@@ -89,11 +94,19 @@ const Appointment = () => {
 
     // Formu temizle
     setFormData({ ownerName: "", petName: "", phone: "", notes: "" });
-    setSelectedTime(null); // Seçimi kaldır (zaten artık disabled olacak)
+    setSelectedTime(null);
   };
 
   return (
     <div className="appointment-page">
+      <Helmet>
+        <title>Randevu | Celcius Veterinarlink</title>
+        <meta
+          name="description"
+          content="VetCare Clinic uzman veteriner kadrosu ile tanışın. 2010'dan beri Kadıköy'de hizmetinizdeyiz."
+        />
+      </Helmet>
+
       {/* HEADER */}
       <div className="appointment-header">
         <div className="container">
@@ -143,7 +156,7 @@ const Appointment = () => {
                       selectedTime === time ? "selected" : ""
                     }`}
                     onClick={() => handleTimeClick(time)}
-                    disabled={booked} // Doluysa tıklanamaz (State güncellendiği için burası anında disabled olacak)
+                    disabled={booked}
                   >
                     {time}
                   </button>
@@ -161,6 +174,23 @@ const Appointment = () => {
           {/* --- SAĞ KOLON: KİŞİSEL BİLGİLER --- */}
           <div className="appointment-card">
             <h2 className="card-heading">2. Kişisel Bilgiler</h2>
+
+            {/* KÜÇÜK BİLGİLENDİRME: HİZMET SEÇİLİ GELDİYSE */}
+            {location.state?.serviceName && (
+              <div
+                style={{
+                  marginBottom: "1rem",
+                  padding: "0.5rem",
+                  backgroundColor: "#e3f2fd",
+                  borderRadius: "5px",
+                  fontSize: "0.9rem",
+                  color: "#0d47a1",
+                }}
+              >
+                ℹ️ <strong>{location.state.serviceName}</strong> hizmeti için
+                randevu alıyorsunuz.
+              </div>
+            )}
 
             <div className="form-group">
               <label className="form-label">Hasta Sahibi Adı Soyadı</label>

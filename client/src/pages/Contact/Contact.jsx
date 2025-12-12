@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ContactSection from "../../components/sections/Contact/ContactSection.jsx";
-import "./Contact.css"; // Birazdan oluşturacağız
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   // Sayfa açılınca en tepeye git
@@ -10,6 +10,13 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
+      <Helmet>
+        <title>İletişim & Randevu Al | VetCare Clinic</title>
+        <meta
+          name="description"
+          content="VetCare Clinic adres, telefon ve konum bilgileri. Acil durumlar veya rutin kontroller için hemen online randevu oluşturun. Kadıköy/İstanbul."
+        />
+      </Helmet>
       {/* Sayfa Başlığı (Banner gibi) */}
       <div className="contact-page-header">
         <div className="container">

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://senin-projen.vercel.app/sitemap.xml

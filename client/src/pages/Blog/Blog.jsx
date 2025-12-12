@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { posts } from "../../data/posts"; // Veri dosyanız
 import "./Blog.css";
-
+import { Helmet } from "react-helmet-async";
 const Blog = () => {
   // Sayfa açıldığında en üste kaydır
   useEffect(() => {
@@ -16,6 +16,13 @@ const Blog = () => {
 
   return (
     <div className="blog-page">
+      <Helmet>
+        <title>Blog | Celcius Veterinarlink</title>
+        <meta
+          name="description"
+          content="VetCare Clinic uzman veteriner kadrosu ile tanışın. 2010'dan beri Kadıköy'de hizmetinizdeyiz."
+        />
+      </Helmet>
       <div className="container">
         {/* HEADER */}
         <div className="blog-header">

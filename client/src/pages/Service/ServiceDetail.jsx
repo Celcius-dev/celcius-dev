@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { services } from "../../data/services"; // Veri dosyan
+import { Helmet } from "react-helmet-async"; // SEO Eklentisi
+import { services } from "../../data/services";
 import "./ServiceDetail.css";
 
 const Service = () => {
@@ -13,7 +14,6 @@ const Service = () => {
   }, [id]);
 
   // 2. Mevcut hizmeti bul
-  // URL'den gelen id string olduğu için Number'a çeviriyoruz
   const currentServiceIndex = services.findIndex((s) => s.id === Number(id));
   const service = services[currentServiceIndex];
 
@@ -46,8 +46,23 @@ const Service = () => {
   const prevService = services[currentServiceIndex - 1];
   const nextService = services[currentServiceIndex + 1];
 
+  // --- YENİ FONKSİYON: Randevu sayfasına veri taşıma ---
+  const handleBookNow = () => {
+    // Randevu sayfasına giderken hizmet adını 'state' olarak gönderiyoruz
+    navigate("/appointment", { state: { serviceName: service.title } });
+  };
+
   return (
     <article className="service-detail-page">
+      {/* --- SEO GÜNCELLEMESİ --- */}
+      <Helmet>
+        <title>{service.title} | Celcius Veterinarlink</title>
+        <meta
+          name="description"
+          content={`${service.title} hizmetimiz hakkında detaylı bilgi alın.`}
+        />
+      </Helmet>
+
       <div className="service-container">
         {/* --- ÜST NAVİGASYON --- */}
         <div className="service-navigation-top">
@@ -73,7 +88,6 @@ const Service = () => {
         )}
 
         {/* --- İÇERİK --- */}
-        {/* HTML etiketlerini işlemek için */}
         <div
           className="service-content"
           dangerouslySetInnerHTML={{
@@ -81,7 +95,21 @@ const Service = () => {
           }}
         />
 
-        {/* --- ALT NAVİGASYON (Önceki/Sonraki) --- */}
+        {/* --- YENİ EKLENEN AKSİYON BUTONU (CTA) --- */}
+        <div
+          className="service-cta-container"
+          style={{ margin: "2rem 0", textAlign: "center" }}
+        >
+          <button
+            className="submit-btn" // Appointment.css'deki stili kullandık veya service css'e ekle
+            onClick={handleBookNow}
+            style={{ padding: "1rem 2rem", fontSize: "1.1rem" }}
+          >
+            📅 Bu Hizmet İçin Randevu Al
+          </button>
+        </div>
+
+        {/* --- ALT NAVİGASYON --- */}
         <nav className="service-navigation-bottom">
           {prevService ? (
             <div
@@ -92,7 +120,7 @@ const Service = () => {
               <span className="nav-title">{prevService.title}</span>
             </div>
           ) : (
-            <div></div> // Boşluk koruyucu
+            <div></div>
           )}
 
           {nextService && (

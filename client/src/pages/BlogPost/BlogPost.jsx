@@ -2,33 +2,42 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { posts } from "../../data/posts";
 import "./BlogPost.css";
+// Helmet Importu
+import { Helmet } from "react-helmet-async";
 
 const BlogPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // 1. Scroll Reset: Sayfa değişince en tepeye at
+  // 1. Scroll Reset
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
   // 2. Mevcut postu bul
-  const currentPostIndex = posts.findIndex((p) => p.id === id);
+  // URL'den gelen id string olduğu için Number'a çeviriyoruz
+  const currentPostIndex = posts.findIndex((p) => p.id === Number(id));
   const post = posts[currentPostIndex];
 
-  // Post bulunamazsa hata vermesin, anasayfaya yönlendirsin veya uyarı versin
+  // Post bulunamazsa hata ekranı
   if (!post) {
     return (
       <div
         className="container"
-        style={{ textAlign: "center", padding: "5rem" }}
+        style={{ textAlign: "center", padding: "8rem 0" }}
       >
+        <Helmet>
+          <title>Yazı Bulunamadı | VetCare Blog</title>
+        </Helmet>
         <h2>Yazı bulunamadı.</h2>
         <button
           onClick={() => navigate("/")}
           style={{
             marginTop: "1rem",
             padding: "0.5rem 1rem",
+            border: "1px solid var(--color-border)",
+            background: "transparent",
+            borderRadius: "8px",
             cursor: "pointer",
           }}
         >
@@ -38,7 +47,7 @@ const BlogPost = () => {
     );
   }
 
-  // 3. Önceki ve Sonraki Postları Hesapla (Değişkenler burada tanımlı)
+  // 3. Önceki ve Sonraki Postları Hesapla
   const prevPost = posts[currentPostIndex - 1];
   const nextPost = posts[currentPostIndex + 1];
 
@@ -52,7 +61,17 @@ const BlogPost = () => {
 
   return (
     <article className="blog-post-page">
+      {/* DİNAMİK SEO BAŞLIĞI */}
+      <Helmet>
+        <title>{post.title} | VetCare Blog</title>
+        <meta
+          name="description"
+          content={post.summary || "VetCare Clinic blog yazısı ve detayları."}
+        />
+      </Helmet>
+
       <div className="blog-container">
+        {/* Üst Navigasyon */}
         <div className="blog-navigation-top">
           <div className="back-link" onClick={() => navigate("/")}>
             ← Anasayfa
@@ -61,8 +80,9 @@ const BlogPost = () => {
             ← Blog Listesi
           </div>
         </div>
+
         <header className="post-header">
-          <span className="post-date">{formatDate(post.createdAt)}</span>
+          <span className="post-date">{formatDate(post.date)}</span>
           <h1 className="post-title-main">{post.title}</h1>
         </header>
 
@@ -78,10 +98,8 @@ const BlogPost = () => {
 
         <div className="post-content">{post.content}</div>
 
-        {/* --- NAVİGASYON BUTONLARI --- */}
-
+        {/* --- ALT NAVİGASYON --- */}
         <nav className="post-navigation">
-          {/* Önceki Post Varsa Göster */}
           {prevPost ? (
             <div
               className="nav-btn prev"
@@ -91,10 +109,9 @@ const BlogPost = () => {
               <span className="nav-title">{prevPost.title}</span>
             </div>
           ) : (
-            <div></div> /* Düzen bozulmasın diye boş kutu */
+            <div></div>
           )}
 
-          {/* Sonraki Post Varsa Göster */}
           {nextPost && (
             <div
               className="nav-btn next"

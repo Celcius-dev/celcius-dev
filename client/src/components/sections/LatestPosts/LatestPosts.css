@@ -80,6 +80,7 @@
   /* Slider içinde tüm kartların eşit boyda olması için kritik: */
   height: 100%;
   min-height: 400px; /* Minimum yükseklik garantisi */
+  max-height: 400px;
 }
 
 .post-card:hover {
