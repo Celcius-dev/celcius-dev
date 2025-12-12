@@ -4,10 +4,10 @@ import MainLayout from "./components/layout/MainLayout.jsx";
 // Sayfalar (Pages)
 import Home from "./pages/Home.jsx";
 import About from "./pages/About/About.jsx";
-import Appointment from "./pages/Appointment.jsx";
+import Appointment from "./pages/Appointment/Appointment.jsx";
 import Blog from "./pages/Blog/Blog.jsx";
 import BlogPost from "./pages/BlogPost/BlogPost.jsx"; // Yeni oluşturacağımız detay sayfası
-import Contact from "./pages/Contact.jsx";
+import Contact from "./pages/Contact/Contact.jsx";
 import Service from "./pages/Service/ServiceDetail.jsx";
 
 function App() {

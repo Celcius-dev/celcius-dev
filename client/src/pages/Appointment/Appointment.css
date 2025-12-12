@@ -1,0 +1,199 @@
+.appointment-page {
+  padding-top: 80px; /* Header payı */
+  min-height: 100vh;
+  background-color: var(--color-bg-body);
+  padding-bottom: 4rem;
+}
+
+/* BANNER ALANI */
+
+.appointment-header {
+  position: relative;
+  color: #ffffff;
+
+  /* Yeni Banner Yapısı: Overlay + Resim */
+  background-image: linear-gradient(
+      to bottom,
+      rgba(16, 115, 110, 0.7),
+      rgba(0, 0, 0, 0.8)
+    ),
+    url("https://images.unsplash.com/photo-1435527173128-983b87201f4d?q=80&w=1167&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  padding: 6rem 0; /* Banner yüksekliğini artırdık */
+  text-align: center;
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow-md);
+}
+
+.appointment-title {
+  font-size: 3rem; /* Başlığı biraz büyüttük */
+  font-weight: 800;
+  margin-bottom: 1rem;
+  /* Yazının resim üzerinde net okunması için gölge */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.appointment-desc {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.95;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* LAYOUT: SOL (Takvim/Saat) - SAĞ (Form) */
+.appointment-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+/* KART YAPISI */
+.appointment-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* TARİH SEÇİCİ */
+.date-picker-container {
+  margin-bottom: 2rem;
+}
+
+.date-input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: var(--font-main);
+  color: var(--color-text-main);
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.date-input:focus {
+  border-color: var(--color-primary);
+}
+
+/* SAAT GRID */
+.time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 1rem;
+}
+
+.time-slot-btn {
+  padding: 0.6rem;
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  transition: all 0.2s;
+}
+
+.time-slot-btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* SEÇİLİ SAAT */
+.time-slot-btn.selected {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+/* DOLU SAAT (DISABLED) */
+.time-slot-btn:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* FORM ALANLARI */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: var(--font-main);
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .appointment-layout {
+    grid-template-columns: 1fr;
+  }
+}

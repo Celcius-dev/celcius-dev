@@ -69,10 +69,10 @@ export default function Header() {
 
         {/* --- DESKTOP BUTTON (desktop-only sınıfı eklendi) --- */}
         <div className="header-actions desktop-only">
-          <button className="header-cta-btn">
+          <Link to="/appointment" className="header-cta-btn">
             Randevu Al
             <span>↗</span>
-          </button>
+          </Link>
         </div>
 
         {/* --- MOBILE BURGER BUTTON (Yeni Eklendi) --- */}
@@ -147,9 +147,13 @@ export default function Header() {
 
             {/* Mobil Randevu Butonu (En Altta) */}
             <div className="mobile-menu-footer">
-              <button className="header-cta-btn mobile-cta">
+              <Link
+                to="/appointment"
+                className="header-cta-btn mobile-cta"
+                onClick={toggleMenu}
+              >
                 Randevu Al <span>↗</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
