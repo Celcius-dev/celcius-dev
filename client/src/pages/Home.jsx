@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>VetCare Clinic | Kadıköy Veteriner Kliniği & 7/24 Acil</title>
+        <title>Celcius Clinic | Kadıköy Veteriner Kliniği & 7/24 Acil</title>
         <meta
           name="description"
           content="İstanbul Kadıköy'de 7/24 hizmet veren modern veteriner kliniği. Aşı takibi, cerrahi operasyonlar, laboratuvar ve acil müdahale hizmetleri."
