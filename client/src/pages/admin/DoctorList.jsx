@@ -7,7 +7,7 @@ import { Edit, Trash2 } from "lucide-react";
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
-  const UPLOAD_URL = "http://localhost:5000/uploads/";
+  const UPLOAD_URL = "https://celcius-dev.onrender.com/uploads/";
 
   const fetchDoctors = async () => {
     try {
