@@ -8,7 +8,7 @@ const About = () => {
   const [loading, setLoading] = useState(true);
 
   // Resimlerin sunucu yolu
-  const UPLOAD_URL = "https://celcius-dev.vercel.app/uploads/";
+  const UPLOAD_URL = "https://celcius-dev.onrender.com/uploads/";
 
   useEffect(() => {
     window.scrollTo(0, 0);
