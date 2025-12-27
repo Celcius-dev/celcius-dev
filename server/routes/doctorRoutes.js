@@ -1,15 +1,101 @@
 import express from "express";
-import {
-  getDoctors,
-  createDoctor,
-  deleteDoctor,
-} from "../controllers/doctorController.js";
-import { verifyToken } from "../middleware/authMiddleware.js";
+import Doctor from "../models/Doctor.js";
+import upload from "../middleware/uploadMiddleware.js"; // Multer ayarımız
+import fs from "fs"; // Dosya silmek için
 
 const router = express.Router();
 
-router.get("/", getDoctors); // Herkes görebilir
-router.post("/", verifyToken, createDoctor); // Sadece Admin ekler
-router.delete("/:id", verifyToken, deleteDoctor); // Sadece Admin siler
+// GET: Tüm Doktorlar
+router.get("/", async (req, res) => {
+  try {
+    const doctors = await Doctor.find();
+    res.json(doctors);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET: Tek Doktor
+router.get("/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+    res.json(doctor);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// POST: Yeni Doktor Ekle (Resim Yüklemeli)
+// upload.single('image') -> Frontend'den gelen 'image' isimli inputu bekler
+router.post("/", upload.single("image"), async (req, res) => {
+  try {
+    const { name, title, summary, content, imageFit } = req.body;
+    const image = req.file ? req.file.filename : ""; // Dosya adını al
+
+    const newDoctor = new Doctor({
+      name,
+      title,
+      summary,
+      content,
+      imageFit,
+      image,
+    });
+
+    const savedDoctor = await newDoctor.save();
+    res.status(201).json(savedDoctor);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// PUT: Güncelle
+router.put("/:id", upload.single("image"), async (req, res) => {
+  try {
+    const { name, title, summary, content, imageFit } = req.body;
+    const doctor = await Doctor.findById(req.params.id);
+
+    if (!doctor) return res.status(404).json("Doktor bulunamadı");
+
+    // Güncellenecek verileri hazırla
+    doctor.name = name;
+    doctor.title = title;
+    doctor.summary = summary;
+    doctor.content = content;
+    doctor.imageFit = imageFit;
+
+    // Eğer yeni resim yüklendiyse eskisini sil ve yenisini kaydet
+    if (req.file) {
+      // Eski resmi sil (Opsiyonel ama temizlik için iyi)
+      if (doctor.image) {
+        fs.unlink(`uploads/${doctor.image}`, (err) => {
+          if (err) console.log(err);
+        });
+      }
+      doctor.image = req.file.filename;
+    }
+
+    const updatedDoctor = await doctor.save();
+    res.json(updatedDoctor);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// DELETE: Sil
+router.delete("/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+    if (doctor && doctor.image) {
+      // Resmi klasörden de sil
+      fs.unlink(`uploads/${doctor.image}`, (err) => {
+        if (err) console.log(err);
+      });
+    }
+    await Doctor.findByIdAndDelete(req.params.id);
+    res.json("Doktor silindi");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 export default router;

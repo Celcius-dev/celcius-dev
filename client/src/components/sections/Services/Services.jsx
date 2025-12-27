@@ -1,36 +1,24 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../../../api/axios";
+import { getIconComponent } from "../../../utils/iconHelper";
 import "./Services.css";
 
-// GEÇİCİ VERİ (Backend bağlanınca bu importu kaldırabilirsin)
-import { services as staticServices } from "../../../data/services";
-
-const ServicesSection = () => {
-  // 1. STATE TANIMLAMALARI
+const Service = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 2. VERİ ÇEKME İŞLEMİ (Simülasyon)
   useEffect(() => {
     const fetchServices = async () => {
       try {
         setLoading(true);
-
-        // --- GERÇEK BACKEND SENARYOSU ---
-        // const response = await axios.get('https://api.vetcare.com/services');
-        // setServices(response.data);
-
-        // --- SİMÜLASYON ---
-        // 1.5 saniye bekleme süresi
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
-        // Veriyi state'e at
-        setServices(staticServices);
+        // Backend'den gerçek veriyi çekiyoruz
+        const response = await api.get("/services");
+        setServices(response.data);
       } catch (err) {
         console.error("Hizmetler yüklenirken hata:", err);
-        setError("Hizmet listesi yüklenirken bir sorun oluştu.");
+        setError("Hizmet listesi şu an görüntülenemiyor.");
       } finally {
         setLoading(false);
       }
@@ -39,7 +27,7 @@ const ServicesSection = () => {
     fetchServices();
   }, []);
 
-  // 3. YÜKLENİYOR EKRANI
+  // Yükleniyor Durumu
   if (loading) {
     return (
       <section className="services-section" id="services">
@@ -48,9 +36,7 @@ const ServicesSection = () => {
           style={{ textAlign: "center", padding: "6rem 0" }}
         >
           <div className="loading-spinner"></div>
-          <p
-            style={{ marginTop: "1rem", color: "var(--color-text-secondary)" }}
-          >
+          <p style={{ marginTop: "1rem", color: "#666" }}>
             Hizmetler yükleniyor...
           </p>
         </div>
@@ -58,39 +44,24 @@ const ServicesSection = () => {
     );
   }
 
-  // 4. HATA EKRANI
+  // Hata Durumu
   if (error) {
     return (
       <section className="services-section" id="services">
         <div
           className="container"
-          style={{ textAlign: "center", color: "#ef4444", padding: "4rem 0" }}
+          style={{ textAlign: "center", padding: "4rem 0" }}
         >
-          <p>{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            style={{
-              marginTop: "1rem",
-              padding: "0.5rem 1rem",
-              border: "1px solid #ef4444",
-              borderRadius: "8px",
-              background: "transparent",
-              color: "#ef4444",
-              cursor: "pointer",
-            }}
-          >
-            Tekrar Dene
-          </button>
+          <p style={{ color: "#ef4444" }}>{error}</p>
         </div>
       </section>
     );
   }
 
-  // 5. BAŞARILI DURUM
   return (
     <section className="services-section" id="services">
       <div className="container">
-        {/* Başlık Alanı */}
+        {/* Bölüm Başlığı */}
         <div className="services-header">
           <h2 className="section-title">Hizmetlerimiz</h2>
           <p className="section-subtitle">
@@ -99,24 +70,49 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        {/* Grid Kartlar */}
+        {/* Hizmet Kartları Grid */}
         <div className="services-grid">
-          {services.map((service) => (
-            <div key={service.id} className="service-card">
-              <div className="service-icon-wrapper">{service.icon}</div>
-              <h3 className="service-title">{service.title}</h3>
-              <p className="service-desc">{service.description}</p>
+          {services.map((service) => {
+            // Veritabanındaki ikon ismini (String) React Bileşenine çevir
+            const IconComponent = getIconComponent(service.icon);
 
-              {/* Detay sayfasına yönlendirme */}
-              <Link to={`/services/${service.id}`} className="service-link">
-                Detaylı Bilgi <span className="arrow">→</span>
-              </Link>
+            return (
+              <div key={service._id} className="service-card">
+                <div className="service-icon-wrapper">
+                  {/* Dinamik İkon */}
+                  <IconComponent size={32} strokeWidth={1.5} />
+                </div>
+
+                <h3 className="service-title">{service.title}</h3>
+
+                {/* Kartta sadece summary (kısa özet) gösterilir */}
+                <p className="service-desc">{service.summary}</p>
+
+                {/* Detay sayfasına git (ID ile) */}
+                <Link to={`/services/${service._id}`} className="service-link">
+                  Detaylı Bilgi <span className="arrow">→</span>
+                </Link>
+              </div>
+            );
+          })}
+
+          {/* Eğer hiç hizmet yoksa */}
+          {services.length === 0 && (
+            <div
+              style={{
+                gridColumn: "1/-1",
+                textAlign: "center",
+                padding: "2rem",
+                color: "#999",
+              }}
+            >
+              Henüz hizmet eklenmemiş.
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
   );
 };
 
-export default ServicesSection;
+export default Service;

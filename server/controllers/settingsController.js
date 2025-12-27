@@ -1,26 +1,35 @@
 import SiteSettings from "../models/SiteSettings.js";
 
-// Ayarları Getir
+// AYARLARI GETİR
 export const getSettings = async (req, res) => {
   try {
-    // İlk bulduğu kaydı getir (Zaten 1 tane olacak)
-    const settings = await SiteSettings.findOne();
-    res.status(200).json(settings || {});
+    // İlk bulduğu ayarı getir
+    let settings = await SiteSettings.findOne();
+
+    // Eğer veritabanında hiç ayar yoksa, boş bir tane oluşturup onu gönder
+    if (!settings) {
+      settings = await SiteSettings.create({});
+    }
+
+    res.status(200).json(settings);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Ayarlar çekilemedi", error });
   }
 };
 
-// Ayarları Güncelle (Yoksa oluşturur, varsa günceller)
+// AYARLARI GÜNCELLE
 export const updateSettings = async (req, res) => {
   try {
-    // İlk kaydı bul, yoksa yeni oluştur (upsert: true)
-    const settings = await SiteSettings.findOneAndUpdate({}, req.body, {
-      new: true,
-      upsert: true,
-    });
-    res.status(200).json(settings);
+    // İlk bulduğunu güncelle, yoksa yeni oluştur (upsert: true)
+    // new: true -> Güncellenmiş veriyi geri döndür
+    const updatedSettings = await SiteSettings.findOneAndUpdate(
+      {}, // Filtre yok, ilkini al
+      req.body, // Gelen veriyi bas
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+
+    res.status(200).json(updatedSettings);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: "Ayarlar güncellenemedi", error });
   }
 };

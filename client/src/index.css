@@ -1,6 +1,7 @@
 /* =========================================
    1. CSS VARIABLES (RENK SİSTEMİ)
    ========================================= */
+
 :root {
   /* --- ANA RENKLER (Marka Kimliği) --- */
   --color-primary: #25b5a3; /* cls-1: Ana Marka Rengi */
@@ -41,6 +42,9 @@
     Arial, sans-serif;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* =========================================
    2. GLOBAL RESET & TEMEL AYARLAR
    ========================================= */

@@ -1,15 +1,26 @@
 import mongoose from "mongoose";
 
-const blogSchema = new mongoose.Schema(
+const BlogSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true }, // Başlık
-    image: { type: String, required: true }, // Resim URL'si veya yolu
-    content: { type: String, required: true }, // İçerik (HTML veya düz metin)
-    author: { type: String, default: "Admin" }, // Yazar (Opsiyonel)
+    title: { type: String, required: true },
+    image: { type: String },
+    imageFit: {
+      type: String,
+      default: "cover",
+      enum: ["cover", "contain"],
+    },
+
+    summary: {
+      type: String,
+      required: true,
+      maxLength: 200,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
   },
-  {
-    timestamps: true, // Otomatik olarak oluşturulma (createdAt) ve güncellenme (updatedAt) tarihlerini ekler
-  }
+  { timestamps: true }
 );
 
-export default mongoose.model("Blog", blogSchema);
+export default mongoose.model("Blog", BlogSchema);

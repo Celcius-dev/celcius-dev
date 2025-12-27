@@ -3,11 +3,13 @@ import {
   getSettings,
   updateSettings,
 } from "../controllers/settingsController.js";
-import { verifyToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", getSettings); // Herkes görebilir
-router.put("/", verifyToken, updateSettings); // Sadece Admin günceller
+// GET: Ayarları çek
+router.get("/", getSettings);
+
+// PUT: Ayarları güncelle (Tek bir ayar olduğu için ID'ye gerek yok)
+router.put("/", updateSettings);
 
 export default router;
