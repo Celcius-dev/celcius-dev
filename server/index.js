@@ -8,6 +8,8 @@ import doctorRoutes from "./routes/doctorRoutes.js";
 import settingsRoutes from "./routes/settingsRoutes.js";
 import serviceRoutes from "./routes/servicesRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger.js";
 
 import path from "path";
 
@@ -30,6 +32,7 @@ app.use("/api/doctors", doctorRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/patients", patientRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Test Route
 app.get("/", (req, res) => {

@@ -1,7 +1,7 @@
 import express from "express";
 import Doctor from "../models/Doctor.js";
-import upload from "../middleware/uploadMiddleware.js"; // Multer ayarımız
-import fs from "fs"; // Dosya silmek için
+import upload from "../middleware/uploadMiddleware.js";
+import fs from "fs";
 
 const router = express.Router();
 
@@ -25,12 +25,11 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// POST: Yeni Doktor Ekle (Resim Yüklemeli)
-// upload.single('image') -> Frontend'den gelen 'image' isimli inputu bekler
+// POST: Yeni Doktor Ekle
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { name, title, summary, content, imageFit } = req.body;
-    const image = req.file ? req.file.filename : ""; // Dosya adını al
+    const image = req.file ? req.file.filename : "";
 
     const newDoctor = new Doctor({
       name,
@@ -56,16 +55,13 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 
     if (!doctor) return res.status(404).json("Doktor bulunamadı");
 
-    // Güncellenecek verileri hazırla
     doctor.name = name;
     doctor.title = title;
     doctor.summary = summary;
     doctor.content = content;
     doctor.imageFit = imageFit;
 
-    // Eğer yeni resim yüklendiyse eskisini sil ve yenisini kaydet
     if (req.file) {
-      // Eski resmi sil (Opsiyonel ama temizlik için iyi)
       if (doctor.image) {
         fs.unlink(`uploads/${doctor.image}`, (err) => {
           if (err) console.log(err);
@@ -86,7 +82,6 @@ router.delete("/:id", async (req, res) => {
   try {
     const doctor = await Doctor.findById(req.params.id);
     if (doctor && doctor.image) {
-      // Resmi klasörden de sil
       fs.unlink(`uploads/${doctor.image}`, (err) => {
         if (err) console.log(err);
       });

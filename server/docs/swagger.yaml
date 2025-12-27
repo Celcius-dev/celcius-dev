@@ -1,0 +1,526 @@
+openapi: 3.0.0
+info:
+  title: VetCare Clinic API
+  version: 1.0.0
+  description: Veteriner Kliniği Yönetim Paneli Tüm API Dokümantasyonu
+  contact:
+    name: Deniz Can Özder
+    email: contact@denizozder.com
+servers:
+  - url: http://localhost:5000/api
+    description: Local Server
+  - url: https://vetcare-api.onrender.com/api
+    description: Production Server (Render)
+
+tags:
+  - name: Doctors
+    description: Hekim Yönetimi
+  - name: Services
+    description: Hizmet Yönetimi
+  - name: Blogs
+    description: Blog Yazıları Yönetimi
+  - name: Patients
+    description: Mutlu Hastalar (Referanslar) Yönetimi
+
+components:
+  schemas:
+    # --- DOKTOR ŞEMASI ---
+    Doctor:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        content:
+          type: string
+        image:
+          type: string
+        imageFit:
+          type: string
+
+    # --- HİZMET ŞEMASI ---
+    Service:
+      type: object
+      required:
+        - title
+        - icon
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        icon:
+          type: string
+          description: Lucide React ikon ismi (örn. Activity)
+        summary:
+          type: string
+        content:
+          type: string
+
+    # --- BLOG ŞEMASI ---
+    Blog:
+      type: object
+      required:
+        - title
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        content:
+          type: string
+        image:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    # --- HASTA ŞEMASI ---
+    Patient:
+      type: object
+      required:
+        - name
+        - breed
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        breed:
+          type: string
+          description: Türü/Irkı
+        age:
+          type: string
+        treatment:
+          type: string
+          description: Yapılan işlem
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        lastVisit:
+          type: string
+        nextVisit:
+          type: string
+        image:
+          type: string
+
+paths:
+  # ==============================
+  # DOKTOR ROTALARI
+  # ==============================
+  /doctors:
+    get:
+      summary: Tüm doktorları listele
+      tags: [Doctors]
+      responses:
+        200:
+          description: Başarılı
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Doctor"
+    post:
+      summary: Yeni doktor ekle
+      tags: [Doctors]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                title:
+                  type: string
+                summary:
+                  type: string
+                content:
+                  type: string
+                imageFit:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: Oluşturuldu
+
+  /doctors/{id}:
+    get:
+      summary: Tek doktor getir
+      tags: [Doctors]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Detay
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Doctor"
+    put:
+      summary: Doktor güncelle
+      tags: [Doctors]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                title:
+                  type: string
+                summary:
+                  type: string
+                content:
+                  type: string
+                imageFit:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Güncellendi
+    delete:
+      summary: Doktor sil
+      tags: [Doctors]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Silindi
+
+  # ==============================
+  # HİZMET ROTALARI
+  # ==============================
+  /services:
+    get:
+      summary: Tüm hizmetleri listele
+      tags: [Services]
+      responses:
+        200:
+          description: Başarılı
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Service"
+    post:
+      summary: Yeni hizmet ekle
+      tags: [Services]
+      requestBody:
+        content:
+          application/json: # Hizmetlerde resim upload yok, JSON kullanıyoruz
+            schema:
+              type: object
+              required:
+                - title
+                - icon
+              properties:
+                title:
+                  type: string
+                icon:
+                  type: string
+                summary:
+                  type: string
+                content:
+                  type: string
+      responses:
+        201:
+          description: Oluşturuldu
+
+  /services/{id}:
+    get:
+      summary: Tek hizmet getir
+      tags: [Services]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Detay
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+    put:
+      summary: Hizmet güncelle
+      tags: [Services]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                icon:
+                  type: string
+                summary:
+                  type: string
+                content:
+                  type: string
+      responses:
+        200:
+          description: Güncellendi
+    delete:
+      summary: Hizmet sil
+      tags: [Services]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Silindi
+
+  # ==============================
+  # BLOG ROTALARI
+  # ==============================
+  /blogs:
+    get:
+      summary: Tüm blogları listele
+      tags: [Blogs]
+      responses:
+        200:
+          description: Başarılı
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Blog"
+    post:
+      summary: Yeni blog yazısı ekle
+      tags: [Blogs]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                summary:
+                  type: string
+                content:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: Oluşturuldu
+
+  /blogs/{id}:
+    get:
+      summary: Tek blog yazısı getir
+      tags: [Blogs]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Detay
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Blog"
+    put:
+      summary: Blog güncelle
+      tags: [Blogs]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                summary:
+                  type: string
+                content:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Güncellendi
+    delete:
+      summary: Blog sil
+      tags: [Blogs]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Silindi
+
+  # ==============================
+  # HASTA (REFERANS) ROTALARI
+  # ==============================
+  /patients:
+    get:
+      summary: Tüm hastaları listele
+      tags: [Patients]
+      responses:
+        200:
+          description: Başarılı
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Patient"
+    post:
+      summary: Yeni hasta referansı ekle
+      tags: [Patients]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - breed
+              properties:
+                name:
+                  type: string
+                breed:
+                  type: string
+                age:
+                  type: string
+                treatment:
+                  type: string
+                description:
+                  type: string
+                lastVisit:
+                  type: string
+                nextVisit:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: Oluşturuldu
+
+  /patients/{id}:
+    get:
+      summary: Tek hasta detayı
+      tags: [Patients]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Detay
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Patient"
+    put:
+      summary: Hasta güncelle
+      tags: [Patients]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                breed:
+                  type: string
+                age:
+                  type: string
+                treatment:
+                  type: string
+                description:
+                  type: string
+                lastVisit:
+                  type: string
+                nextVisit:
+                  type: string
+                image:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Güncellendi
+    delete:
+      summary: Hasta sil
+      tags: [Patients]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: Silindi
