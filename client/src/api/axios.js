@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api", // Backend adresin
+  baseURL: "https://celcius-dev.onrender.com/api", // Backend adresin
 });
 
 // Her istek gönderilmeden önce araya gir:
