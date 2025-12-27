@@ -1,21 +1,13 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "https://celcius-dev.onrender.com/api", // Backend adresin
-});
+// Mantık şu:
+// Eğer Vercel'de tanımlı bir VITE_BACKEND_URL varsa onu kullan.
+// Yoksa (yani bilgisayarında çalışıyorsan) localhost'u kullan.
+const BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api";
 
-// Her istek gönderilmeden önce araya gir:
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+const api = axios.create({
+  baseURL: BASE_URL,
+});
 
 export default api;
