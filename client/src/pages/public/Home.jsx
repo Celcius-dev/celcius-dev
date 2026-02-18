@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Celcius Clinic | Kadıköy Veteriner Kliniği & 7/24 Acil</title>
+        <title>Celcius Klinik | Malmö Veterinärklinik & Akutmottagning</title>
         <meta
           name="description"
-          content="İstanbul Kadıköy'de 7/24 hizmet veren modern veteriner kliniği. Aşı takibi, cerrahi operasyonlar, laboratuvar ve acil müdahale hizmetleri."
+          content="Modern veterinärklinik i Malmö öppen dygnet runt. Vi erbjuder vaccinationer, kirurgi, laboratorium och akutvård."
         />
       </Helmet>
       <Hero />

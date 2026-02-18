@@ -77,7 +77,7 @@ export default function Header() {
 
         {/* --- MOBILE BURGER BUTTON (Yeni Eklendi) --- */}
         <button
-          className="mobile-menu-btn"
+          className={`mobile-menu-btn ${isMobileMenuOpen ? "hidden" : ""}`}
           onClick={toggleMenu}
           aria-label="Menüyü Aç"
         >

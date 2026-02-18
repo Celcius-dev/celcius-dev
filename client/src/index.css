@@ -59,6 +59,7 @@
 html {
   scroll-behavior: smooth; /* #services gibi linklere yumuşak gider */
   font-size: 16px;
+  scrollbar-width: none; /* Firefox */
 }
 
 body {
@@ -139,18 +140,15 @@ button {
    5. SCROLLBAR (BONUS: Modern Çubuk)
    ========================================= */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0px;
+  background: transparent;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-body);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: transparent;
 }

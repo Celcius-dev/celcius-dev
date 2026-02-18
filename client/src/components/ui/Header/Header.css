@@ -130,6 +130,10 @@
   transition: var(--transition-normal);
 }
 
+.mobile-menu-btn.hidden {
+  display: none !important;
+}
+
 /* Mobil Menü Katmanı (Overlay) */
 .mobile-menu-overlay {
   position: fixed;

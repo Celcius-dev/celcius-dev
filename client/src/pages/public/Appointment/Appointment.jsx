@@ -100,10 +100,10 @@ const Appointment = () => {
   return (
     <div className="appointment-page">
       <Helmet>
-        <title>Randevu | Celcius Veterinarlink</title>
+        <title>Boka Tid | Celcius Klinik</title>
         <meta
           name="description"
-          content="VetCare Clinic uzman veteriner kadrosu ile tanışın. 2010'dan beri Kadıköy'de hizmetinizdeyiz."
+          content="Boka tid online hos Celcius Klinik i Malmö. Enkelt och smidigt."
         />
       </Helmet>
 

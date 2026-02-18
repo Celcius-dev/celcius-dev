@@ -12,10 +12,10 @@ const Contact = () => {
   return (
     <div className="contact-page">
       <Helmet>
-        <title>Kontakt | Celcius</title>
+        <title>Kontakt | Celcius Klinik</title>
         <meta
           name="description"
-          content="VetCare Clinic adres, telefon ve konum bilgileri. Acil durumlar veya rutin kontroller için hemen online randevu oluşturun. Kadıköy/İstanbul."
+          content="Kontakta Celcius Klinik i Malmö för tidsbokning och frågor. Hitta oss, ring oss eller boka tid online."
         />
       </Helmet>
       {/* Sayfa Başlığı (Banner gibi) */}

@@ -67,7 +67,7 @@
 }
 
 /* --- KART TASARIMI (Grid yerine Slider içi) --- */
-.post-card {
+.blog-card {
   display: flex;
   flex-direction: column;
   background: var(--color-bg-surface);
@@ -79,11 +79,10 @@
 
   /* Slider içinde tüm kartların eşit boyda olması için kritik: */
   height: 100%;
-  min-height: 400px; /* Minimum yükseklik garantisi */
-  max-height: 400px;
+  min-height: 450px; /* Minimum yükseklik garantisi - artırıldı */
 }
 
-.post-card:hover {
+.blog-card:hover {
   transform: translateY(-5px);
   border-color: var(--color-primary);
   box-shadow: var(--shadow-md);
@@ -102,7 +101,7 @@
   object-fit: contain;
   transition: transform 0.5s ease;
 }
-.post-card:hover .post-image {
+.blog-card:hover .post-image {
   transform: scale(1.05);
 }
 
@@ -160,7 +159,7 @@
   transition: gap 0.3s ease;
 }
 
-.post-card:hover .read-more-btn {
+.blog-card:hover .read-more-btn {
   gap: 8px;
   color: var(--color-primary-hover);
 }
