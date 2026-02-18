@@ -197,7 +197,7 @@ const Footer = () => {
 
         {/* ALT KISIM */}
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Celcius. Tüm hakları saklıdır.</p>
+          <p>&copy; {currentYear} Celcius. All Right Reserved.</p>
           <div className="footer-legal">
             <Link to="/privacy">Integritetspolicy</Link>
             <Link to="/terms">Användarvillkor</Link>
