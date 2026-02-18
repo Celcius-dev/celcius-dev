@@ -35,7 +35,7 @@ const Login = () => {
             <input
               type="email"
               className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="admin@veteriner.com"
+              placeholder="admin@klinik.se"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

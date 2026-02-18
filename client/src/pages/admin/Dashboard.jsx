@@ -68,8 +68,7 @@ const Dashboard = () => {
           });
         }
 
-        // 2. İstatistikleri Çek (Opsiyonel: Eğer endpointlerin hazırsa)
-        // Şimdilik blog ve doktor sayılarını manuel endpointlerden de alabilirsin
+        // 2. İstatistikleri Çek
         const blogsRes = await api.get("/blogs");
         const doctorsRes = await api.get("/doctors");
         setStats({
@@ -77,8 +76,8 @@ const Dashboard = () => {
           doctors: doctorsRes.data.length,
         });
       } catch (error) {
-        console.error("Veri çekilemedi", error);
-        toast.error("Panel bilgileri yüklenirken hata oluştu.");
+        console.error("Kunde inte hämta data", error);
+        toast.error("Ett fel uppstod när panelinformationen laddades.");
       }
     };
 
@@ -113,10 +112,10 @@ const Dashboard = () => {
     setLoading(true);
     try {
       await api.put("/settings", settings);
-      toast.success("Site ayarları güncellendi!");
+      toast.success("Webbplatsens inställningar har uppdaterats!");
     } catch (error) {
       console.error(error);
-      toast.error("Ayarlar kaydedilemedi.");
+      toast.error("Inställningarna kunde inte sparas.");
     } finally {
       setLoading(false);
     }
@@ -125,7 +124,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold text-slate-800 mb-6 border-b pb-4">
-        Panel Özeti & Hızlı Ayarlar
+        Panelöversikt & Snabbinställningar
       </h1>
 
       {/* İSTATİSTİKLER (Dinamik) */}
@@ -133,7 +132,7 @@ const Dashboard = () => {
         <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-center justify-between">
           <div>
             <h3 className="text-blue-600 font-bold uppercase text-xs tracking-wider">
-              Toplam Blog Yazısı
+              Totalt Antal Blogginlägg
             </h3>
             <p className="text-4xl font-bold text-slate-800 mt-2">
               {stats.blogs}
@@ -145,7 +144,7 @@ const Dashboard = () => {
         <div className="bg-green-50 p-6 rounded-lg border border-green-100 flex items-center justify-between">
           <div>
             <h3 className="text-green-600 font-bold uppercase text-xs tracking-wider">
-              Hekim Sayısı
+              Antal Veterinärer
             </h3>
             <p className="text-4xl font-bold text-slate-800 mt-2">
               {stats.doctors}
@@ -162,7 +161,7 @@ const Dashboard = () => {
             <Globe size={20} />
           </div>
           <h2 className="text-xl font-bold text-slate-800">
-            Genel Site Bilgileri
+            Allmän Webbplatsinformation
           </h2>
         </div>
 
@@ -171,27 +170,27 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-1">
-                <Phone size={16} /> Telefon Numarası
+                <Phone size={16} /> Telefonnummer
               </label>
               <input
                 type="text"
                 name="phone"
                 value={settings.phone}
                 onChange={handleChange}
-                placeholder="+90 555 000 0000"
+                placeholder="+46 00 000 00 00"
                 className="w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-1">
-                <Mail size={16} /> E-mail Adresi
+                <Mail size={16} /> E-postadress
               </label>
               <input
                 type="email"
                 name="email"
                 value={settings.email}
                 onChange={handleChange}
-                placeholder="info@klinik.com"
+                placeholder="info@klinik.se"
                 className="w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
@@ -199,14 +198,14 @@ const Dashboard = () => {
 
           <div>
             <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-1">
-              <MapPin size={16} /> Açık Adres
+              <MapPin size={16} /> Adress
             </label>
             <input
               type="text"
               name="address"
               value={settings.address}
               onChange={handleChange}
-              placeholder="Adres bilgisi..."
+              placeholder="Adressuppgifter..."
               className="w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-blue-500 outline-none"
             />
           </div>
@@ -214,7 +213,7 @@ const Dashboard = () => {
           {/* Sosyal Medya */}
           <div className="border-t border-gray-200 pt-4">
             <h3 className="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider">
-              Sosyal Medya Linkleri
+              Länkar till Sociala Medier
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <input
@@ -247,12 +246,12 @@ const Dashboard = () => {
           {/* Çalışma Saatleri */}
           <div className="border-t border-gray-200 pt-4">
             <h3 className="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wider flex items-center gap-2">
-              <Clock size={16} /> Çalışma Saatleri
+              <Clock size={16} /> Öppettider
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8">
               <div className="bg-white p-3 rounded border border-gray-200">
                 <p className="text-sm font-bold text-gray-700 mb-2">
-                  Hafta İçi
+                  Måndag - Fredag (Vardagar)
                 </p>
                 <div className="flex items-center gap-2">
                   <select
@@ -282,38 +281,6 @@ const Dashboard = () => {
                   </select>
                 </div>
               </div>
-              <div className="bg-white p-3 rounded border border-gray-200">
-                <p className="text-sm font-bold text-gray-700 mb-2">
-                  Hafta Sonu
-                </p>
-                <div className="flex items-center gap-2">
-                  <select
-                    name="weekendStart"
-                    value={settings.hours.weekendStart}
-                    onChange={handleHoursChange}
-                    className="border p-2 rounded w-full"
-                  >
-                    {timeOptions.map((t) => (
-                      <option key={t} value={t}>
-                        {t}
-                      </option>
-                    ))}
-                  </select>
-                  <span>-</span>
-                  <select
-                    name="weekendEnd"
-                    value={settings.hours.weekendEnd}
-                    onChange={handleHoursChange}
-                    className="border p-2 rounded w-full"
-                  >
-                    {timeOptions.map((t) => (
-                      <option key={t} value={t}>
-                        {t}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -324,7 +291,7 @@ const Dashboard = () => {
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded w-full md:w-auto flex items-center justify-center gap-2 transition"
             >
               <Save size={20} />{" "}
-              {loading ? "Kaydediliyor..." : "Ayarları Güncelle"}
+              {loading ? "Sparar..." : "Uppdatera Inställningar"}
             </button>
           </div>
         </form>

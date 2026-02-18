@@ -21,8 +21,13 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 // Middleware (Ara yazılımlar)
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(cors());
 app.use(express.json());

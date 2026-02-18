@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import api from "../../api/axios";
+import api, { UPLOAD_URL } from "../../api/axios";
 import { toast } from "react-toastify";
 import { Edit, Trash2 } from "lucide-react";
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
-  const UPLOAD_URL = "https://celcius-dev.onrender.com/uploads/";
+  // URL artık axios.js'den geliyor
 
   const fetchDoctors = async () => {
     try {
       const res = await api.get("/doctors");
       setDoctors(res.data);
     } catch (error) {
-      toast.error("Hekim listesi yüklenemedi.");
+      toast.error("Kunde inte hämta veterinärlistan.");
     } finally {
       setLoading(false);
     }
@@ -25,29 +25,29 @@ const DoctorList = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm("Bu hekimi silmek istediğine emin misin?")) {
+    if (window.confirm("Är du säker på att du vill ta bort denna veterinär?")) {
       try {
         await api.delete(`/doctors/${id}`);
         setDoctors(doctors.filter((d) => d._id !== id));
-        toast.success("Hekim silindi.");
+        toast.success("Veterinären har tagits bort.");
       } catch (error) {
-        toast.error("Silme işlemi başarısız.");
+        toast.error("Borttagning misslyckades.");
       }
     }
   };
 
   if (loading)
-    return <div className="p-8 text-center text-gray-500">Yükleniyor...</div>;
+    return <div className="p-8 text-center text-gray-500">Laddar...</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Hekim Listesi</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Veterinärlista</h1>
         <Link
           to="/admin/doctors/new"
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
-          + Yeni Hekim Ekle
+          + Lägg till ny veterinär
         </Link>
       </div>
 
@@ -56,10 +56,10 @@ const DoctorList = () => {
           <thead>
             <tr>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                Hekim Adı / Ünvan
+                Namn / Titel
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">
-                İşlemler
+                Åtgärder
               </th>
             </tr>
           </thead>

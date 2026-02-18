@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import api from "../../../api/axios"; // Backend API bağlantısı
+import api, { UPLOAD_URL } from "../../../api/axios"; // Backend API bağlantısı
 import "./About.css";
 
 const About = () => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Resimlerin sunucu yolu
-  const UPLOAD_URL = "https://celcius-dev.onrender.com/uploads/";
+  // Resimlerin sunucu yolu import edildi
 
   useEffect(() => {
     window.scrollTo(0, 0);

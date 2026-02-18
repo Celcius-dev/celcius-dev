@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import api from "../../../api/axios"; // Axios instance
+import api, { UPLOAD_URL } from "../../../api/axios"; // Axios instance
 import { Helmet } from "react-helmet-async";
 import "./Blog.css";
 
@@ -8,8 +8,7 @@ const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Resimlerin sunucudaki adresi
-  const UPLOAD_URL = "http://localhost:5000/uploads/";
+  // Resimlerin sunucudaki adresi import edildi
 
   useEffect(() => {
     // Sayfa açıldığında en üste kaydır

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../../api/axios";
+import api, { UPLOAD_URL } from "../../api/axios";
 import { toast } from "react-toastify";
 import { Save, ArrowLeft, Upload, User, Stethoscope } from "lucide-react";
 
@@ -8,7 +8,7 @@ const DoctorForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const isEditMode = !!id;
-  const UPLOAD_URL = "http://localhost:5000/uploads/";
+  // const UPLOAD_URL silindi, import edildi
 
   // Form Verileri (Sadece İsim ve Ünvan)
   const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ const DoctorForm = () => {
             );
           }
         } catch (error) {
-          toast.error("Hekim bilgileri yüklenemedi.");
+          toast.error("Kunde inte hämta information om veterinären.");
         }
       };
       fetchDoctor();
@@ -75,15 +75,15 @@ const DoctorForm = () => {
     try {
       if (isEditMode) {
         await api.put(`/doctors/${id}`, data);
-        toast.success("Hekim başarıyla güncellendi!");
+        toast.success("Veterinären uppdaterades framgångsrikt!");
       } else {
         await api.post("/doctors", data);
-        toast.success("Yeni hekim başarıyla eklendi!");
+        toast.success("Ny veterinär tillagd!");
       }
       navigate("/admin/doctors");
     } catch (error) {
       console.error(error);
-      toast.error("İşlem başarısız oldu.");
+      toast.error("Åtgärden misslyckades.");
     } finally {
       setLoading(false);
     }
@@ -100,7 +100,7 @@ const DoctorForm = () => {
           <ArrowLeft />
         </button>
         <h1 className="text-2xl font-bold text-gray-800">
-          {isEditMode ? "Hekim Bilgilerini Düzenle" : "Yeni Hekim Ekle"}
+          {isEditMode ? "Redigera Veterinär" : "Lägg till ny veterinär"}
         </h1>
       </div>
 
@@ -111,14 +111,14 @@ const DoctorForm = () => {
         {/* Ad Soyad */}
         <div>
           <label className="block text-gray-700 font-bold mb-2 flex items-center gap-2">
-            <User size={18} className="text-blue-600" /> Ad Soyad
+            <User size={18} className="text-blue-600" /> Namn & Efternamn
           </label>
           <input
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition"
-            placeholder="Örn: Dr. Ahmet Yılmaz"
+            placeholder="T.ex: Dr. Anna Svensson"
             required
           />
         </div>
@@ -126,7 +126,7 @@ const DoctorForm = () => {
         {/* Ünvan */}
         <div>
           <label className="block text-gray-700 font-bold mb-2 flex items-center gap-2">
-            <Stethoscope size={18} className="text-blue-600" /> Ünvan / Uzmanlık
+            <Stethoscope size={18} className="text-blue-600" /> Titel / Specialitet
           </label>
           <input
             type="text"
@@ -135,7 +135,7 @@ const DoctorForm = () => {
               setFormData({ ...formData, title: e.target.value })
             }
             className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition"
-            placeholder="Örn: Cerrahi Uzmanı"
+            placeholder="T.ex: Kirurgispecialist"
             required
           />
         </div>
@@ -143,7 +143,7 @@ const DoctorForm = () => {
         {/* Fotoğraf Yükleme Alanı */}
         <div className="bg-gray-50 p-6 rounded-lg border-2 border-dashed border-gray-300 hover:bg-gray-100 transition relative group text-center">
           <label className="block text-gray-700 font-bold mb-4 cursor-pointer">
-            Profil Fotoğrafı
+            Profilbild
           </label>
 
           <div className="flex flex-col items-center justify-center">
@@ -155,7 +155,7 @@ const DoctorForm = () => {
                   className="w-32 h-32 object-cover rounded-full shadow-md border-4 border-white"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition text-white text-xs pointer-events-none">
-                  Değiştir
+                  Ändra
                 </div>
               </div>
             ) : (
@@ -166,8 +166,8 @@ const DoctorForm = () => {
 
             <p className="mt-4 text-sm text-gray-500">
               {previewUrl
-                ? "Farklı bir fotoğraf seçmek için tıkla"
-                : "Yüklemek için tıkla veya sürükle"}
+                ? "Klicka för att välja en annan bild"
+                : "Klicka eller dra för att ladda upp"}
             </p>
           </div>
 
@@ -188,10 +188,10 @@ const DoctorForm = () => {
           >
             <Save size={20} />
             {loading
-              ? "İşleniyor..."
+              ? "Bearbetar..."
               : isEditMode
-              ? "Değişiklikleri Kaydet"
-              : "Hekimi Kaydet"}
+              ? "Spara Ändringar"
+              : "Spara Veterinär"}
           </button>
         </div>
       </form>

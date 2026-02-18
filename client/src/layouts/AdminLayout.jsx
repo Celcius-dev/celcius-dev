@@ -22,7 +22,7 @@ const AdminLayout = () => {
 
   // Menü Elemanları
   const menuItems = [
-    { path: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
+    { path: "/admin", label: "Översikt", icon: LayoutDashboard, end: true },
     { path: "/admin/blogs", label: "Blogghantering", icon: FileText }, // Blog Yönetimi
     { path: "/admin/doctors", label: "Veterinärer", icon: Stethoscope }, // Hekimler
     {
@@ -42,7 +42,7 @@ const AdminLayout = () => {
       <aside className="w-64 bg-slate-900 text-white flex flex-col fixed h-full z-10">
         {/* Başlık Alanı */}
         <div className="p-6 border-b border-slate-700">
-          <h2 className="text-2xl font-bold text-blue-400">Veterinär Panel</h2>
+          <h2 className="text-2xl font-bold text-blue-400">Veterinärpanelen</h2>
           <p className="text-xs text-gray-400 mt-1">
             Välkommen, {user?.username || "Admin"}
           </p>

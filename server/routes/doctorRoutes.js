@@ -2,8 +2,14 @@ import express from "express";
 import Doctor from "../models/Doctor.js";
 import upload from "../middleware/uploadMiddleware.js";
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const router = express.Router();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const UPLOADS_DIR = path.join(__dirname, "../uploads");
 
 // GET: Tüm Doktorlar
 router.get("/", async (req, res) => {
@@ -63,9 +69,13 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 
     if (req.file) {
       if (doctor.image) {
-        fs.unlink(`uploads/${doctor.image}`, (err) => {
-          if (err) console.log(err);
-        });
+        // Eski resmi güvenli yoldan sil
+        const oldImagePath = path.join(UPLOADS_DIR, doctor.image);
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlink(oldImagePath, (err) => {
+            if (err) console.log("Dosya silme hatası:", err);
+          });
+        }
       }
       doctor.image = req.file.filename;
     }
@@ -82,9 +92,12 @@ router.delete("/:id", async (req, res) => {
   try {
     const doctor = await Doctor.findById(req.params.id);
     if (doctor && doctor.image) {
-      fs.unlink(`uploads/${doctor.image}`, (err) => {
-        if (err) console.log(err);
-      });
+      const imagePath = path.join(UPLOADS_DIR, doctor.image);
+      if (fs.existsSync(imagePath)) {
+        fs.unlink(imagePath, (err) => {
+          if (err) console.log("Dosya silme hatası:", err);
+        });
+      }
     }
     await Doctor.findByIdAndDelete(req.params.id);
     res.json("Doktor silindi");

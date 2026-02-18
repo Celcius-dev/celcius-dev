@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../../../api/axios"; // Axios
+import api, { UPLOAD_URL } from "../../../api/axios"; // Axios
 import "./BlogPost.css";
 import { Helmet } from "react-helmet-async";
 
@@ -13,8 +13,7 @@ const BlogPost = () => {
   const [nextPost, setNextPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Bu URL'i kendi canlı sunucu adresinle değiştirmeyi unutma
-  const UPLOAD_URL = "https://celcius-dev.onrender.com/uploads/";
+  // URL import edildi
 
   // 1. Scroll Reset ve Veri Çekme
   useEffect(() => {

@@ -6,6 +6,9 @@ import axios from "axios";
 const BASE_URL =
   import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api";
 
+// Upload URL'sini de buradan dışarı açıyoruz ki her yerde aynısı kullanılsın
+export const UPLOAD_URL = BASE_URL.replace("/api", "") + "/uploads/";
+
 const api = axios.create({
   baseURL: BASE_URL,
 });
