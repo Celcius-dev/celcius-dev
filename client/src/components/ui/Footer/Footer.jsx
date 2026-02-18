@@ -9,9 +9,9 @@ const Footer = () => {
 
   // State sadeleştirildi
   const [contactInfo, setContactInfo] = useState({
-    address: "Veterinärgatan 123, Stockholm",
+    address: "Celsiusgatan 40, 212 14, Malmö",
     phone: "08-123 456 78",
-    email: "info@vetcare.se",
+    email: "Info@celsiusveterinärklinik.se",
     facebook: "#",
     instagram: "#",
     twitter: "#",
@@ -127,48 +127,48 @@ const Footer = () => {
             <h3 className="footer-title">Kurumsal</h3>
             <ul className="footer-links">
               <li>
-                <Link to="/">Anasayfa</Link>
+                <Link to="/">Startsida</Link>
               </li>
               <li>
-                <Link to="/about">Hakkımızda</Link>
+                <Link to="/about">Om Oss</Link>
               </li>
               <li>
-                <Link to="/blog">Blog & Haberler</Link>
+                <Link to="/blog">Blogg & Nyheter</Link>
               </li>
               <li>
-                <Link to="/contact">İletişim</Link>
+                <Link to="/contact">Kontakt</Link>
               </li>
               <li>
-                <Link to="/appointment">Randevu Al</Link>
+                <Link to="/appointment">Boka Tid</Link>
               </li>
             </ul>
           </div>
 
           {/* 3. KOLON: Hizmetler */}
           <div className="footer-col">
-            <h3 className="footer-title">Hizmetlerimiz</h3>
+            <h3 className="footer-title">Våra Tjänster</h3>
             <ul className="footer-links">
               <li>
-                <Link to="/services">Genel Muayene</Link>
+                <Link to="/services">Allmän Undersökning</Link>
               </li>
               <li>
-                <Link to="/services">Aşı Takvimi</Link>
+                <Link to="/services">Vaccination</Link>
               </li>
               <li>
-                <Link to="/services">Cerrahi Operasyonlar</Link>
+                <Link to="/services">Kirurgi</Link>
               </li>
               <li>
-                <Link to="/services">Diş Bakımı</Link>
+                <Link to="/services">Tandvård</Link>
               </li>
               <li>
-                <Link to="/services">Acil Müdahale</Link>
+                <Link to="/services">Akutvård</Link>
               </li>
             </ul>
           </div>
 
           {/* 4. KOLON: İletişim & Saatler */}
           <div className="footer-col contact-col">
-            <h3 className="footer-title">İletişim</h3>
+            <h3 className="footer-title">Kontakt</h3>
             <ul className="contact-list">
               <li>
                 <span className="contact-icon">📍</span>
@@ -185,25 +185,22 @@ const Footer = () => {
             </ul>
 
             <div className="working-hours">
-              <h4 className="wh-title">Çalışma Saatleri</h4>
+              <h4 className="wh-title">Öppettider</h4>
               {/* Çalışma saatleri SABİT yazıldı */}
               <p>
-                Pzt - Cum: <span>08:00 - 18:00</span>
+                Måndag - Fredag: <span>08:00 - 17:00</span>
               </p>
-              <p>
-                Cmt: <span>09:00 - 15:00</span>
-              </p>
-              <p className="closed">Pazar: Kapalı</p>
+              <p className="closed">Lördag - Söndag: Stängt</p>
             </div>
           </div>
         </div>
 
         {/* ALT KISIM */}
         <div className="footer-bottom">
-          <p>&copy; {currentYear} VetCare Clinic. Tüm hakları saklıdır.</p>
+          <p>&copy; {currentYear} Celcius. Tüm hakları saklıdır.</p>
           <div className="footer-legal">
-            <Link to="/privacy">Gizlilik Politikası</Link>
-            <Link to="/terms">Kullanım Şartları</Link>
+            <Link to="/privacy">Integritetspolicy</Link>
+            <Link to="/terms">Användarvillkor</Link>
           </div>
         </div>
       </div>

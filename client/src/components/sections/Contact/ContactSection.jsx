@@ -13,7 +13,7 @@ const ContactSection = ({ hideTitle = false }) => {
         const res = await api.get("/settings");
         setSettings(res.data);
       } catch (error) {
-        console.error("İletişim bilgileri alınamadı", error);
+        console.error("Kunde inte hämta kontaktuppgifter", error); // Hata mesajı İsveççe
       } finally {
         setLoading(false);
       }
@@ -24,9 +24,9 @@ const ContactSection = ({ hideTitle = false }) => {
 
   if (loading) return null;
 
-  // --- DİNAMİK LİNKLERİ OLUŞTURUYORUZ ---
+  // --- DİNAMİK LİNKLER ---
 
-  // 1. Telefon Linki (Boşlukları temizle: "+90 555" -> "+90555")
+  // 1. Telefon Linki
   const phoneLink = settings?.phone
     ? `tel:${settings.phone.replace(/\s+/g, "")}`
     : "#";
@@ -34,10 +34,10 @@ const ContactSection = ({ hideTitle = false }) => {
   // 2. Mail Linki
   const mailLink = settings?.email ? `mailto:${settings.email}` : "#";
 
-  // 3. Harita Linki (Google Maps'te adresi arat)
+  // 3. Harita Linki (Syntax düzeltmesi ile birlikte)
   const addressLink = settings?.address
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        settings.address
+        settings.address,
       )}`
     : "#";
 
@@ -45,41 +45,43 @@ const ContactSection = ({ hideTitle = false }) => {
     {
       id: 1,
       icon: <Phone size={32} strokeWidth={1.5} />,
-      title: "Telefon",
-      text: settings?.phone || "Numara Girilmemiş",
-      subText: "Hemen Aramak İçin Tıklayın", // Kullanıcıyı yönlendiren metin
-      link: phoneLink, // Link eklendi
-      isExternal: false, // Yeni sekmede açılmasın
+      title: "Telefon", // İsveççe aynı
+      text: settings?.phone || "Nummer saknas", // Numara yok
+      subText: "Klicka för att ringa", // Aramak için tıklayın
+      link: phoneLink,
+      isExternal: false,
     },
     {
       id: 2,
       icon: <Mail size={32} strokeWidth={1.5} />,
-      title: "E-Posta",
+      title: "E-post", // E-Posta -> E-post
       text: settings?.email || "info@klinik.com",
-      subText: "Mail Göndermek İçin Tıklayın",
+      subText: "Klicka för att maila", // Mail atmak için tıklayın
       link: mailLink,
       isExternal: false,
     },
     {
       id: 3,
       icon: <MapPin size={32} strokeWidth={1.5} />,
-      title: "Adres",
-      text: settings?.address || "Adres Bilgisi Yok",
-      subText: "Yol Tarifi Al",
+      title: "Adress", // Adres -> Adress
+      text: settings?.address || "Adress saknas", // Adres yok
+      subText: "Få vägbeskrivning", // Yol tarifi al
       link: addressLink,
-      isExternal: true, // Harita yeni sekmede açılsın
+      isExternal: true,
     },
     {
       id: 4,
       icon: <Clock size={32} strokeWidth={1.5} />,
-      title: "Çalışma Saatleri",
-      text: `Hafta İçi: ${settings?.hours?.weekdayStart || "09:00"} - ${
+      title: "Öppettider", // Çalışma Saatleri
+      // Hafta İçi -> Vardagar
+      text: `Vardagar: ${settings?.hours?.weekdayStart || "09:00"} - ${
         settings?.hours?.weekdayEnd || "18:00"
       }`,
-      subText: `Hafta Sonu: ${settings?.hours?.weekendStart || "10:00"} - ${
+      // Hafta Sonu -> Helger
+      subText: `Helger: ${settings?.hours?.weekendStart || "10:00"} - ${
         settings?.hours?.weekendEnd || "15:00"
       }`,
-      link: null, // Saatler tıklanabilir değil
+      link: null,
     },
   ];
 
@@ -88,16 +90,16 @@ const ContactSection = ({ hideTitle = false }) => {
       <div className="container">
         {!hideTitle && (
           <div className="contact-header">
-            <h2 className="section-title">Bize Ulaşın</h2>
+            <h2 className="section-title">Kontakta oss</h2> {/* Bize Ulaşın */}
             <p className="section-subtitle">
-              Size ve evcil dostunuza yardımcı olmak için buradayız.
+              Vi finns här för att hjälpa dig och ditt husdjur.
+              {/* Size ve evcil dostunuza yardımcı olmak için buradayız */}
             </p>
           </div>
         )}
 
         <div className="contact-cards-grid">
           {contactInfo.map((info) => {
-            // Eğer link varsa 'a' etiketi, yoksa 'div' kullanıyoruz
             const CardWrapper = info.link ? "a" : "div";
 
             return (
@@ -111,7 +113,6 @@ const ContactSection = ({ hideTitle = false }) => {
                     ? "cursor-pointer hover:shadow-lg transition-shadow"
                     : ""
                 }`}
-                // Link olmayan kartlarda tıklama görüntüsünü engellemek için
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <div className="icon-wrapper">{info.icon}</div>
@@ -125,14 +126,14 @@ const ContactSection = ({ hideTitle = false }) => {
 
         <div className="map-container">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1127.0754007480407!2d13.033401456905093!3d55.59938909322886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3d877560297%3A0x331dfc0bf198a8a4!2zQ2Vsc2l1c2dhdGFuIDQwLCAyMTIgMTQgTWFsbcO2LCDEsHN2ZcOn!5e0!3m2!1str!2str!4v1766842070984!5m2!1str!2str"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1127.0754007480407!2d13.033401456905093!3d55.59938909322886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3d877560297%3A0x331dfc0bf198a8a4!2zQ2Vsc2l1c2dhdGFuIDQwLCAyMTIgMTQgTWFsbcO2LCDEsHN2ZcOn!5e0!3m2!1str!2str!4v1766842070984!5m2!1str!2str" // Buraya kendi embed linkinizi koymayı unutmayın, standart placeholder bıraktım.
             width="100%"
             height="450"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="VetCare Clinic Location"
+            title="Klinikens plats" // "Klinik Konumu" -> Klinikens plats
           ></iframe>
         </div>
       </div>

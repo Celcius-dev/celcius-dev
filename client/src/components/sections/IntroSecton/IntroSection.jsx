@@ -47,24 +47,23 @@ export default function IntroSection() {
           <div className="intro-badge-row">
             <div className="intro-badge">
               <span className="intro-badge-pulse" />
-              7/24 Acil Destek
+              Öppet vardagar 08.00 - 17.00
             </div>
             <div className="intro-badge-text">
-              Online randevu, dijital hasta geçmişi ve modern tanı sistemi.
+              Vi erbjuder online bokning, digital patienthistorik och ett
+              modernt diagnossystem
             </div>
           </div>
 
           <h2 className="intro-title">
-            Evcil dostlarınız için
-            <br />
-            <span className="highlight">yumuşak dokunuşlu</span> veteriner
-            bakımı.
+            Veterinärvård <br />
+            <span className="highlight">för djurens bästa</span>
           </h2>
 
           <p className="intro-text">
-            VetCare Clinic; muayene, aşı, cerrahi ve laboratuvar hizmetlerini,
-            dijital kayıt sistemiyle tek noktada toplar. Siz dostunuzla
-            ilgilenirken, tüm süreçleri biz takip ederiz.
+            Celcius samlar undersökning, vaccination, kirurgi och
+            laboratorietjänster på ett ställe med ett digitalt journalsystem.
+            Medan du fokuserar på din vän, tar vi hand om hela processen.
           </p>
 
           <div className="intro-actions">
@@ -72,10 +71,10 @@ export default function IntroSection() {
               className="intro-cta-primary"
               onClick={(e) => e.preventDefault()}
             >
-              Şimdi Randevu Al <span>↗</span>
+              Boka Tid Nu <span>↗</span>
             </button>
             <button className="intro-cta-secondary" onClick={scrollToServices}>
-              Hizmetlerimizi İncele
+              Utforska Våra Tjänster
             </button>
           </div>
         </div>
@@ -125,13 +124,13 @@ export default function IntroSection() {
 
               {/* Footer Bilgileri */}
               <div className="intro-card-footer">
-                <span>Son kontrol: {selectedPatient.lastVisit}</span>
-                <span>Bir sonraki: {selectedPatient.nextVisit}</span>
+                <span>Senaste besök: {selectedPatient.lastVisit}</span>
+                <span>Nästa besök: {selectedPatient.nextVisit}</span>
               </div>
             </div>
           ) : (
             <div className="intro-card flex items-center justify-center min-h-[350px]">
-              <p>Henüz hasta kaydı yok.</p>
+              <p>Ingen patient registrerad än.</p>
             </div>
           )}
         </div>

@@ -13,7 +13,8 @@ const BlogPost = () => {
   const [nextPost, setNextPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const UPLOAD_URL = "http://localhost:5000/uploads/";
+  // Bu URL'i kendi canlı sunucu adresinle değiştirmeyi unutma
+  const UPLOAD_URL = "https://celcius-dev.onrender.com/uploads/";
 
   // 1. Scroll Reset ve Veri Çekme
   useEffect(() => {
@@ -27,10 +28,10 @@ const BlogPost = () => {
 
         // Listeleme sayfasındaki aynı sıralamayı yapıyoruz
         const sortedPosts = res.data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
 
-        // Şu anki postun indexini bul (String karşılaştırması güvenlidir)
+        // Şu anki postun indexini bul
         const currentIndex = sortedPosts.findIndex((p) => p._id === id);
 
         if (currentIndex === -1) {
@@ -38,14 +39,13 @@ const BlogPost = () => {
           setPost(null);
         } else {
           setPost(sortedPosts[currentIndex]);
-          // Listede index küçüldükçe tarih büyür (daha yeni), büyüdükçe tarih küçülür (daha eski)
           // Prev: Daha yeni olan (Index - 1)
           // Next: Daha eski olan (Index + 1)
           setPrevPost(sortedPosts[currentIndex - 1] || null);
           setNextPost(sortedPosts[currentIndex + 1] || null);
         }
       } catch (error) {
-        console.error("Blog detayı yüklenemedi:", error);
+        console.error("Kunde inte ladda blogginlägget:", error); // İsveççe log
       } finally {
         setLoading(false);
       }
@@ -74,9 +74,9 @@ const BlogPost = () => {
         style={{ textAlign: "center", padding: "8rem 0" }}
       >
         <Helmet>
-          <title>Yazı Bulunamadı | VetCare Blog</title>
+          <title>Inlägget hittades inte | Celsius Blogg</title>
         </Helmet>
-        <h2>Aradığınız yazı bulunamadı veya silinmiş.</h2>
+        <h2>Inlägget du söker hittades inte eller har tagits bort.</h2>
         <button
           onClick={() => navigate("/blog")}
           style={{
@@ -88,15 +88,15 @@ const BlogPost = () => {
             cursor: "pointer",
           }}
         >
-          Blog Listesine Dön
+          Tillbaka till bloggen
         </button>
       </div>
     );
   }
 
-  // Tarih Formatı
+  // Tarih Formatı (İsveççe)
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString("tr-TR", {
+    return new Date(dateString).toLocaleDateString("sv-SE", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -107,10 +107,13 @@ const BlogPost = () => {
     <article className="blog-post-page">
       {/* DİNAMİK SEO BAŞLIĞI */}
       <Helmet>
-        <title>{post.title} | VetCare Blog</title>
+        <title>{post.title} | Celsius Blogg</title>
         <meta
           name="description"
-          content={post.summary || "VetCare Clinic blog yazısı ve detayları."}
+          content={
+            post.summary ||
+            "Blogginlägg och nyheter från Celsius Veterinärklinik."
+          }
         />
       </Helmet>
 
@@ -118,10 +121,10 @@ const BlogPost = () => {
         {/* Üst Navigasyon */}
         <div className="blog-navigation-top">
           <div className="back-link" onClick={() => navigate("/")}>
-            ← Anasayfa
+            ← Hem {/* Anasayfa */}
           </div>
           <div className="back-link" onClick={() => navigate("/blog")}>
-            ← Blog Listesi
+            ← Tillbaka till bloggen {/* Blog Listesi */}
           </div>
         </div>
 
@@ -148,7 +151,7 @@ const BlogPost = () => {
 
         {/* HTML İÇERİĞİ RENDER ETMEK İÇİN */}
         <div
-          className="post-content ql-editor" // ql-editor class'ı Quill stillerini korur
+          className="post-content ql-editor"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
@@ -159,7 +162,7 @@ const BlogPost = () => {
               className="nav-btn prev"
               onClick={() => navigate(`/blog/${prevPost._id}`)}
             >
-              <span className="nav-label">← Önceki Yazı</span>
+              <span className="nav-label">← Föregående inlägg</span>
               <span className="nav-title">{prevPost.title}</span>
             </div>
           ) : (
@@ -171,7 +174,7 @@ const BlogPost = () => {
               className="nav-btn next"
               onClick={() => navigate(`/blog/${nextPost._id}`)}
             >
-              <span className="nav-label">Sonraki Yazı →</span>
+              <span className="nav-label">Nästa inlägg →</span>
               <span className="nav-title">{nextPost.title}</span>
             </div>
           )}

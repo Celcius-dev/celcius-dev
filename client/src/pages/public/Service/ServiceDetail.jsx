@@ -37,7 +37,7 @@ const ServiceDetail = () => {
           setNextService(allServices[currentIndex + 1] || null);
         }
       } catch (error) {
-        console.error("Hizmet detayı yüklenemedi:", error);
+        console.error("Kunde inte hämta tjänstedetaljer:", error); // İsveççe log
       } finally {
         setLoading(false);
       }
@@ -46,7 +46,7 @@ const ServiceDetail = () => {
     fetchServiceData();
   }, [id]);
 
-  // Randevu sayfasına yönlendirme
+  // Randevu sayfasına yönlendirme (Eğer kullanılırsa diye tutuyoruz)
   const handleBookNow = () => {
     if (service) {
       navigate("/appointment", { state: { serviceName: service.title } });
@@ -73,9 +73,9 @@ const ServiceDetail = () => {
         style={{ textAlign: "center", padding: "8rem 0" }}
       >
         <Helmet>
-          <title>Hizmet Bulunamadı | Celcius Veterinarlink</title>
+          <title>Tjänsten hittades inte | Celsius Veterinärklinik</title>
         </Helmet>
-        <h2>Aradığınız hizmet bulunamadı.</h2>
+        <h2>Tjänsten du söker hittades inte.</h2>
         <button
           onClick={() => navigate("/")}
           style={{
@@ -87,7 +87,7 @@ const ServiceDetail = () => {
             cursor: "pointer",
           }}
         >
-          Anasayfaya Dön
+          Tillbaka till startsidan
         </button>
       </div>
     );
@@ -100,12 +100,12 @@ const ServiceDetail = () => {
     <article className="service-detail-page">
       {/* --- SEO --- */}
       <Helmet>
-        <title>{service.title} | VetCare Hizmetlerimiz</title>
+        <title>{service.title} | Våra Tjänster - Celsius</title>
         <meta
           name="description"
           content={
             service.summary ||
-            `${service.title} hizmetimiz hakkında detaylı bilgi.`
+            `Läs mer om ${service.title} och våra veterinärtjänster på Celsius.`
           }
         />
       </Helmet>
@@ -114,7 +114,7 @@ const ServiceDetail = () => {
         {/* --- ÜST NAVİGASYON --- */}
         <div className="service-navigation-top">
           <div className="back-link" onClick={() => navigate("/")}>
-            ← Anasayfa
+            ← Hem {/* Anasayfa */}
           </div>
         </div>
 
@@ -123,8 +123,7 @@ const ServiceDetail = () => {
           <h1 className="service-title-main">{service.title}</h1>
         </header>
 
-        {/* --- GÖRSEL ALANI (İKON KULLANIYORUZ) --- */}
-        {/* Backend modelinde resim upload yok, ikon var. O yüzden şık bir ikon alanı yapıyoruz */}
+        {/* --- GÖRSEL ALANI (İKON) --- */}
         <div
           className="service-image-container"
           style={{
@@ -142,37 +141,18 @@ const ServiceDetail = () => {
 
         {/* --- İÇERİK (HTML) --- */}
         <div
-          className="service-content ql-editor" // ql-editor class'ı Quill stillerini korur
+          className="service-content ql-editor"
           dangerouslySetInnerHTML={{
             __html: service.content,
           }}
         />
 
         {/* --- AKSİYON BUTONU (CTA) --- */}
+        {/* Eğer buraya buton ekleyecekseniz 'Boka Tid' (Randevu Al) yazabilirsiniz */}
         <div
           className="service-cta-container"
           style={{ margin: "3rem 0", textAlign: "center" }}
-        >
-          <button
-            onClick={handleBookNow}
-            style={{
-              padding: "1rem 2.5rem",
-              fontSize: "1.1rem",
-              fontWeight: "bold",
-              backgroundColor: "#2563eb",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              cursor: "pointer",
-              boxShadow: "0 4px 6px rgba(37, 99, 235, 0.3)",
-              transition: "transform 0.2s",
-            }}
-            onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
-            onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
-          >
-            📅 Bu Hizmet İçin Randevu Al
-          </button>
-        </div>
+        ></div>
 
         {/* --- ALT NAVİGASYON --- */}
         <nav className="service-navigation-bottom">
@@ -181,7 +161,7 @@ const ServiceDetail = () => {
               className="nav-btn prev"
               onClick={() => navigate(`/services/${prevService._id}`)}
             >
-              <span className="nav-label">← Önceki Hizmet</span>
+              <span className="nav-label">← Föregående tjänst</span>
               <span className="nav-title">{prevService.title}</span>
             </div>
           ) : (
@@ -193,7 +173,7 @@ const ServiceDetail = () => {
               className="nav-btn next"
               onClick={() => navigate(`/services/${nextService._id}`)}
             >
-              <span className="nav-label">Sonraki Hizmet →</span>
+              <span className="nav-label">Nästa tjänst →</span>
               <span className="nav-title">{nextService.title}</span>
             </div>
           )}

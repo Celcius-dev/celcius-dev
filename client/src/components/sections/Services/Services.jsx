@@ -37,7 +37,7 @@ const Service = () => {
         >
           <div className="loading-spinner"></div>
           <p style={{ marginTop: "1rem", color: "#666" }}>
-            Hizmetler yükleniyor...
+            Services Loading...
           </p>
         </div>
       </section>
@@ -63,10 +63,10 @@ const Service = () => {
       <div className="container">
         {/* Bölüm Başlığı */}
         <div className="services-header">
-          <h2 className="section-title">Hizmetlerimiz</h2>
+          <h2 className="section-title">Våra Tjänster</h2>
           <p className="section-subtitle">
-            Modern tıbbın tüm imkanlarını, sevgi ve ilgiyle birleştirerek
-            sunuyoruz.
+            Vi erbjuder ett brett utbud av tjänster inom poliklinik, operation,
+            ortopedi, tand, lab och medicin.
           </p>
         </div>
 
@@ -90,7 +90,7 @@ const Service = () => {
 
                 {/* Detay sayfasına git (ID ile) */}
                 <Link to={`/services/${service._id}`} className="service-link">
-                  Detaylı Bilgi <span className="arrow">→</span>
+                  Mer information <span className="arrow">→</span>
                 </Link>
               </div>
             );
@@ -106,7 +106,7 @@ const Service = () => {
                 color: "#999",
               }}
             >
-              Henüz hizmet eklenmemiş.
+              Inga tjänster tillagda än.
             </div>
           )}
         </div>

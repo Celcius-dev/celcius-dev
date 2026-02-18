@@ -53,27 +53,27 @@ export default function Header() {
         <nav className="site-nav desktop-only">
           <div className="site-nav-links">
             <a href="/#services" className="site-nav-link">
-              Hizmetler
+              Tjänster
             </a>
             <a href="/about" className="site-nav-link">
-              Hakkımızda
+              Om oss
             </a>
             <a href="/blog" className="site-nav-link">
-              Blog
+              Blogg
             </a>
             <a href="/contact" className="site-nav-link">
-              İletişim
+              Kontakta
             </a>
           </div>
         </nav>
 
         {/* --- DESKTOP BUTTON (desktop-only sınıfı eklendi) --- */}
-        <div className="header-actions desktop-only">
+        {/* <div className="header-actions desktop-only">
           <Link to="/appointment" className="header-cta-btn">
             Randevu Al
             <span>↗</span>
           </Link>
-        </div>
+        </div> */}
 
         {/* --- MOBILE BURGER BUTTON (Yeni Eklendi) --- */}
         <button
@@ -132,21 +132,21 @@ export default function Header() {
             {/* Mobil Linkler */}
             <nav className="mobile-nav">
               <a href="/#services" onClick={toggleMenu}>
-                Hizmetler
+                Tjänster
               </a>
               <a href="/about" onClick={toggleMenu}>
-                Hakkımızda
+                Om oss
               </a>
               <a href="/blog" onClick={toggleMenu}>
-                Blog
+                Blogg
               </a>
               <a href="/contact" onClick={toggleMenu}>
-                İletişim
+                Kontakta
               </a>
             </nav>
 
             {/* Mobil Randevu Butonu (En Altta) */}
-            <div className="mobile-menu-footer">
+            {/* <div className="mobile-menu-footer">
               <Link
                 to="/appointment"
                 className="header-cta-btn mobile-cta"
@@ -154,7 +154,7 @@ export default function Header() {
               >
                 Randevu Al <span>↗</span>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

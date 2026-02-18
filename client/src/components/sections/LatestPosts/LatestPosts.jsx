@@ -29,7 +29,7 @@ const LatestPosts = () => {
 
         // 2. Tarihe göre sırala (En yeni en üstte)
         const sortedBlogs = res.data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
 
         // 3. Slider için son 6 yazıyı al
@@ -66,11 +66,10 @@ const LatestPosts = () => {
         {/* Başlık Alanı */}
         <div className="section-header text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Güncel Blog Yazıları
+            Senaste blogginlägg och nyheter
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Evcil dostlarınızın sağlığı, bakımı ve beslenmesi hakkında uzman
-            hekimlerimizden ipuçları.
+            Tips från experter rörande djurhälsa, skötsel och näring.
           </p>
         </div>
 
@@ -139,7 +138,7 @@ const LatestPosts = () => {
                     to={`/blog/${blog._id}`}
                     className="inline-flex items-center text-blue-600 font-semibold text-sm hover:gap-2 transition-all mt-auto"
                   >
-                    Devamını Oku <ArrowRight size={16} className="ml-1" />
+                    Läs mer <ArrowRight size={16} className="ml-1" />
                   </Link>
                 </div>
               </div>
@@ -149,7 +148,7 @@ const LatestPosts = () => {
           {/* Eğer hiç blog yoksa */}
           {blogs.length === 0 && (
             <div className="text-center py-10 text-gray-500">
-              Henüz blog yazısı eklenmemiş.
+              Inga blogginlägg tillagda än.
             </div>
           )}
         </Swiper>
@@ -160,7 +159,7 @@ const LatestPosts = () => {
             to="/blog"
             className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-8 rounded-full transition duration-300"
           >
-            Tüm Yazıları İncele
+            Visa alla blogginlägg och nyheter
           </Link>
         </div>
       </div>

@@ -17,18 +17,16 @@ export default function Hero() {
       <div className="container hero-content-container">
         <div className="hero-content">
           <h1 className="main-hero-title">
-            Minik Dostlarınız İçin <br />
-            <span className="text-highlight">Modern ve Sevgi Dolu</span> Bir
-            Yuva
+            En modern och kärleksfull plats <br />
+            <span className="text-highlight">för dina små vänner</span>
           </h1>
 
           <p className="main-hero-desc">
-            İsveç standartlarında veteriner hekimlik hizmeti, artık Türkiye'de.
-            Onlar ailenizin bir parçası, bizim ise önceliğimiz.
+            Den större kliniken med det varma hjärtat i den lilla
           </p>
 
           <Link to="/about" className="hero-about-btn">
-            Hakkımızda Daha Fazla
+            Om oss
           </Link>
         </div>
       </div>

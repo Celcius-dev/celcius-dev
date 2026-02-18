@@ -20,7 +20,7 @@ const Blog = () => {
         const res = await api.get("/blogs");
         // YENİDEN ESKİYE SIRALAMA MANTIĞI (Tarihe göre)
         const sortedPosts = res.data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
         setPosts(sortedPosts);
       } catch (error) {
@@ -56,7 +56,7 @@ const Blog = () => {
   return (
     <div className="blog-page">
       <Helmet>
-        <title>Blog | VetCare Veteriner Kliniği</title>
+        <title>Blogg | Celcius</title>
         <meta
           name="description"
           content="VetCare Clinic uzman veteriner kadrosu ile tanışın. Evcil dostlarınız için güncel bilgiler."
@@ -66,10 +66,10 @@ const Blog = () => {
       <div className="container">
         {/* HEADER */}
         <div className="blog-header">
-          <h1 className="blog-title">VetCare Blog</h1>
+          <h1 className="blog-title">Celcius Blogg</h1>
           <p className="blog-desc">
-            Evcil dostlarınızın sağlığı, beslenmesi ve bakımı hakkında uzman
-            veterinerlerimizden güncel bilgiler ve ipuçları.
+            Aktuell information och tips från våra veterinärexperter om ditt
+            husdjurs hälsa, näring och skötsel
           </p>
         </div>
 
@@ -97,7 +97,6 @@ const Blog = () => {
               <div className="blog-card-content">
                 <div className="blog-meta">
                   {/* Kategori yerine Yazar gösteriyoruz, admin panelde kategori yoktu */}
-                  <span className="blog-category">Admin</span>
                   <span className="blog-date">
                     {formatDate(post.createdAt)}
                   </span>
@@ -112,7 +111,7 @@ const Blog = () => {
                 </p>
 
                 <div className="blog-read-more">
-                  Devamını Oku <span>→</span>
+                  Läs mer <span>→</span>
                 </div>
               </div>
             </Link>
