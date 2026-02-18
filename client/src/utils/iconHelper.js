@@ -1,5 +1,17 @@
 // İhtiyacın olabilecek tüm ikonları buraya ekle
 import {
+  Building, // Hastane/Klinik
+  ClipboardList, // Raporlar
+  Scan, // Görüntüleme
+  Monitor, // Yoğun Bakım
+  Bed, // Yatış
+  Siren, // Acil
+  ShieldCheck, // Aşı/Koruma
+  Microscope, // Lab
+  FileHeart, // Sağlık Kayıtları
+  UserRound, // Uzmanlar
+  BriefcaseMedical, // Medikal Çanta
+  Baby, // Pediyatri/Yenidoğan
   Stethoscope,
   Syringe,
   Dog,
@@ -11,7 +23,6 @@ import {
   Pill,
   HeartPulse,
   Brain,
-  Microscope,
   Thermometer,
   Eye,
   Zap,
@@ -19,21 +30,32 @@ import {
 
 // 1. Admin Panelinde Seçilecek Liste
 export const iconList = [
-  { name: "Stethoscope", component: Stethoscope, label: "Muayene" },
-  { name: "Syringe", component: Syringe, label: "Aşı" },
-  { name: "Dog", component: Dog, label: "Köpek Bakımı" },
-  { name: "Cat", component: Cat, label: "Kedi Bakımı" },
-  { name: "Scissors", component: Scissors, label: "Tıraş & Bakım" },
-  { name: "Bone", component: Bone, label: "Ortopedi / Kırık" },
-  { name: "Ambulance", component: Ambulance, label: "Acil Servis" },
-  { name: "Pill", component: Pill, label: "Eczane" },
-  { name: "HeartPulse", component: HeartPulse, label: "Kardiyoloji" },
-  { name: "Brain", component: Brain, label: "Nöroloji" },
-  { name: "Microscope", component: Microscope, label: "Laboratuvar" },
-  { name: "Thermometer", component: Thermometer, label: "Ateş Ölçümü" },
-  { name: "Eye", component: Eye, label: "Göz Tedavisi" },
-  { name: "Zap", component: Zap, label: "Lazer Tedavi" },
-  { name: "Activity", component: Activity, label: "Genel / Diğer" },
+  { name: "Building", component: Building, label: "Sjukhus/Klinik" },
+  { name: "ClipboardList", component: ClipboardList, label: "Rapporter/Kontroller" },
+  { name: "Scan", component: Scan, label: "Röntgen/MR" },
+  { name: "Monitor", component: Monitor, label: "Intensivvård" },
+  { name: "Bed", component: Bed, label: "Inläggning" },
+  { name: "Siren", component: Siren, label: "Akut 24/7" },
+  { name: "ShieldCheck", component: ShieldCheck, label: "Vaccination" },
+  { name: "Microscope", component: Microscope, label: "Laboratorium" },
+  { name: "FileHeart", component: FileHeart, label: "Journaler" },
+  { name: "UserRound", component: UserRound, label: "Specialister" },
+  { name: "BriefcaseMedical", component: BriefcaseMedical, label: "Medicinska Tjänster" },
+  { name: "Baby", component: Baby, label: "Nyfödd/Pediatrik" },
+  { name: "Stethoscope", component: Stethoscope, label: "Undersökning" },
+  { name: "Syringe", component: Syringe, label: "Vaccin" },
+  { name: "Dog", component: Dog, label: "Hundvård" },
+  { name: "Cat", component: Cat, label: "Kattvård" },
+  { name: "Scissors", component: Scissors, label: "Trimning & Vård" },
+  { name: "Bone", component: Bone, label: "Ortopedi" },
+  { name: "Ambulance", component: Ambulance, label: "Ambulans" },
+  { name: "Pill", component: Pill, label: "Apotek" },
+  { name: "HeartPulse", component: HeartPulse, label: "Kardiologi" },
+  { name: "Brain", component: Brain, label: "Neurologi" },
+  { name: "Thermometer", component: Thermometer, label: "Febermätning" },
+  { name: "Eye", component: Eye, label: "Ögonbehandling" },
+  { name: "Zap", component: Zap, label: "Laserbehandling" },
+  { name: "Activity", component: Activity, label: "Allmänt" },
 ];
 
 // 2. String isminden Component getiren fonksiyon

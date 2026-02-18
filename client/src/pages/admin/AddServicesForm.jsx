@@ -46,7 +46,7 @@ const AddServiceForm = () => {
             content: res.data.content,
           });
         } catch (error) {
-          toast.error("Hizmet bilgileri yüklenemedi.");
+          toast.error("Kunde inte hämta tjänstinformation."); // Hizmet bilgileri yüklenemedi.
         }
       };
       fetchService();
@@ -59,14 +59,21 @@ const AddServiceForm = () => {
     try {
       if (isEditMode) {
         await api.put(`/services/${id}`, formData);
-        toast.success("Hizmet güncellendi!");
+        toast.success("Tjänsten har uppdaterats!"); // Hizmet güncellendi!
       } else {
         await api.post("/services", formData);
-        toast.success("Hizmet eklendi!");
+        toast.success("Tjänsten har lagts till!"); // Hizmet eklendi!
       }
       navigate("/admin/services");
     } catch (error) {
-      toast.error("İşlem başarısız.");
+      if (error.response?.data?.errors) {
+        // Zod validation errors
+        error.response.data.errors.forEach((err) => {
+          toast.error(err.message);
+        });
+      } else {
+        toast.error("Åtgärden misslyckades."); // İşlem başarısız.
+      }
     } finally {
       setLoading(false);
     }
@@ -92,7 +99,7 @@ const AddServiceForm = () => {
             <ArrowLeft />
           </button>
           <h1 className="text-2xl font-bold text-gray-800">
-            {isEditMode ? "Hizmeti Düzenle" : "Yeni Hizmet Ekle"}
+            {isEditMode ? "Redigera Tjänst" : "Lägg till ny tjänst"} {/* Hizmeti Düzenle / Yeni Hizmet Ekle */}
           </h1>
         </div>
 
@@ -102,7 +109,7 @@ const AddServiceForm = () => {
           className="flex items-center gap-2 text-blue-600 hover:bg-blue-50 px-3 py-2 rounded font-medium transition border border-transparent hover:border-blue-100"
         >
           <Eye size={20} />
-          Önizle
+          Förhandsgranska {/* Önizle */}
         </button>
       </div>
 
@@ -113,7 +120,7 @@ const AddServiceForm = () => {
         {/* Hizmet Başlığı */}
         <div>
           <label className="block text-gray-700 font-bold mb-2">
-            Hizmet Başlığı
+            Tjänstens Rubrik {/* Hizmet Başlığı */}
           </label>
           <input
             type="text"
@@ -122,7 +129,7 @@ const AddServiceForm = () => {
               setFormData({ ...formData, title: e.target.value })
             }
             className="w-full border p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Örn: Cerrahi Müdahale"
+            placeholder="T.ex. Kirurgi" // Örn: Cerrahi Müdahale
             required
           />
         </div>
@@ -130,7 +137,7 @@ const AddServiceForm = () => {
         {/* İkon Seçici */}
         <div className="bg-slate-50 p-5 rounded-lg border border-slate-200">
           <div className="flex justify-between items-center mb-4">
-            <label className="block text-gray-700 font-bold">İkon Seçimi</label>
+            <label className="block text-gray-700 font-bold">Välj Ikon</label> {/* İkon Seçimi */}
             <div className="relative">
               <Search
                 size={16}
@@ -138,7 +145,7 @@ const AddServiceForm = () => {
               />
               <input
                 type="text"
-                placeholder="İkon ara..."
+                placeholder="Sök ikon..." // İkon ara...
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-9 pr-3 py-1 text-sm border rounded-full outline-none focus:border-blue-500"
@@ -186,9 +193,9 @@ const AddServiceForm = () => {
         {/* Kısa Özet */}
         <div>
           <label className="block text-gray-700 font-bold mb-2">
-            Kısa Açıklama{" "}
+            Kort beskrivning{" "} {/* Kısa Açıklama */}
             <span className="text-xs font-normal text-gray-500">
-              (Anasayfa kartlarında görünür)
+              (Visas på startsidan) {/* Anasayfa kartlarında görünür */}
             </span>
           </label>
           <textarea
@@ -199,7 +206,7 @@ const AddServiceForm = () => {
             maxLength={200}
             rows="3"
             className="w-full border p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-            placeholder="Hizmet hakkında kısa bir özet..."
+            placeholder="En kort sammanfattning av tjänsten..." // Hizmet hakkında kısa bir özet...
             required
           />
           <div className="text-right text-xs text-gray-400 mt-1">
@@ -210,7 +217,7 @@ const AddServiceForm = () => {
         {/* Detay İçerik */}
         <div>
           <label className="block text-gray-700 font-bold mb-2">
-            Detaylı Hizmet İçeriği
+            Detaljerat Innehåll {/* Detaylı Hizmet İçeriği */}
           </label>
           <ReactQuill
             theme="snow"
@@ -218,7 +225,7 @@ const AddServiceForm = () => {
             onChange={(val) => setFormData({ ...formData, content: val })}
             modules={modules}
             className="bg-white h-60 mb-12"
-            placeholder="Hizmet detaylarını buraya yazın..."
+            placeholder="Skriv tjänstens detaljer här..." // Hizmet detaylarını buraya yazın...
           />
         </div>
 
@@ -231,10 +238,10 @@ const AddServiceForm = () => {
           >
             <Save size={20} />
             {loading
-              ? "İşleniyor..."
+              ? "Bearbetar..." // İşleniyor...
               : isEditMode
-              ? "Değişiklikleri Kaydet"
-              : "Hizmeti Yayınla"}
+              ? "Spara Ändringar" // Değişiklikleri Kaydet
+              : "Publicera Tjänst"} {/* Hizmeti Yayınla */}
           </button>
         </div>
       </form>
@@ -245,7 +252,7 @@ const AddServiceForm = () => {
           <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full h-[90vh] flex flex-col relative">
             <div className="flex justify-between items-center p-4 border-b bg-gray-50 rounded-t-xl">
               <h3 className="font-bold text-gray-700 flex items-center gap-2">
-                <Eye size={18} /> Detay Sayfası Önizlemesi
+                <Eye size={18} /> Förhandsgranska Detaljsida {/* Detay Sayfası Önizlemesi */}
               </h3>
               <button
                 onClick={() => setShowPreview(false)}
@@ -263,10 +270,10 @@ const AddServiceForm = () => {
                 </div>
 
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                  {formData.title || "Başlık Yok"}
+                  {formData.title || "Ingen Rubrik"} {/* Başlık Yok */}
                 </h1>
                 <p className="text-xl text-gray-500">
-                  {formData.summary || "Kısa açıklama buraya gelecek..."}
+                  {formData.summary || "En kort beskrivning kommer här..."} {/* Kısa açıklama buraya gelecek... */}
                 </p>
               </div>
 
@@ -284,7 +291,7 @@ const AddServiceForm = () => {
                 onClick={() => setShowPreview(false)}
                 className="px-6 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 font-bold transition"
               >
-                Kapat
+                Stäng {/* Kapat */}
               </button>
             </div>
           </div>

@@ -23,17 +23,17 @@ const AdminLayout = () => {
   // Menü Elemanları
   const menuItems = [
     { path: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
-    { path: "/admin/blogs", label: "Blog Yönetimi", icon: FileText },
-    { path: "/admin/doctors", label: "Hekimler", icon: Stethoscope },
+    { path: "/admin/blogs", label: "Blogghantering", icon: FileText }, // Blog Yönetimi
+    { path: "/admin/doctors", label: "Veterinärer", icon: Stethoscope }, // Hekimler
     {
       path: "/admin/services",
-      label: "Hizmet Yönetimi",
+      label: "Tjänstehantering", // Hizmet Yönetimi
       icon: BriefcaseMedical,
     },
 
     // --- YENİ EKLENENLER ---
-    { path: "/admin/patients", label: "Mutlu Hastalar", icon: Heart },
-    { path: "/admin/settings", label: "Site Ayarları", icon: Settings },
+    { path: "/admin/patients", label: "Lyckliga Patienter", icon: Heart }, // Mutlu Hastalar
+    { path: "/admin/settings", label: "Inställningar", icon: Settings }, // Site Ayarları
   ];
 
   return (
@@ -42,9 +42,9 @@ const AdminLayout = () => {
       <aside className="w-64 bg-slate-900 text-white flex flex-col fixed h-full z-10">
         {/* Başlık Alanı */}
         <div className="p-6 border-b border-slate-700">
-          <h2 className="text-2xl font-bold text-blue-400">Veteriner Panel</h2>
+          <h2 className="text-2xl font-bold text-blue-400">Veterinär Panel</h2>
           <p className="text-xs text-gray-400 mt-1">
-            Hoşgeldin, {user?.username || "Admin"}
+            Välkommen, {user?.username || "Admin"}
           </p>
         </div>
 
@@ -80,7 +80,7 @@ const AdminLayout = () => {
             className="flex items-center justify-center gap-2 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded transition shadow-sm font-medium"
           >
             <LogOut size={18} />
-            Çıkış Yap
+            Logga ut
           </button>
         </div>
       </aside>

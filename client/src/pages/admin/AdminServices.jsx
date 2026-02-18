@@ -18,7 +18,7 @@ const AdminServices = () => {
       const res = await api.get("/services");
       setServices(res.data);
     } catch (error) {
-      toast.error("Hizmetler yüklenirken hata oluştu.");
+      toast.error("Ett fel uppstod när tjänsterna laddades."); // Hizmetler yüklenirken hata oluştu.
     } finally {
       setLoading(false);
     }
@@ -29,13 +29,13 @@ const AdminServices = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm("Bu hizmeti silmek istediğine emin misin?")) {
+    if (window.confirm("Är du säker på att du vill ta bort den här tjänsten?")) { // Bu hizmeti silmek istediğine emin misin?
       try {
         await api.delete(`/services/${id}`);
         setServices(services.filter((s) => s._id !== id));
-        toast.success("Hizmet silindi.");
+        toast.success("Tjänsten har tagits bort."); // Hizmet silindi.
       } catch (error) {
-        toast.error("Silme başarısız.");
+        toast.error("Borttagning misslyckades."); // Silme başarısız.
       }
     }
   };
@@ -47,17 +47,17 @@ const AdminServices = () => {
   };
 
   if (loading)
-    return <div className="p-8 text-center text-gray-500">Yükleniyor...</div>;
+    return <div className="p-8 text-center text-gray-500">Laddar...</div>; // Yükleniyor...
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Hizmet Yönetimi</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Tjänstehantering</h1> {/* Hizmet Yönetimi */}
         <Link
           to="/admin/services/new"
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
-          + Yeni Hizmet Ekle
+          + Lägg till ny tjänst {/* Yeni Hizmet Ekle */}
         </Link>
       </div>
 
@@ -66,13 +66,13 @@ const AdminServices = () => {
           <thead>
             <tr>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                Hizmet / İkon
+                Tjänst / Ikon {/* Hizmet / İkon */}
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                Kısa Özet
+                Sammanfattning {/* Kısa Özet */}
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">
-                İşlemler
+                Åtgärder {/* İşlemler */}
               </th>
             </tr>
           </thead>
@@ -105,7 +105,7 @@ const AdminServices = () => {
                       <button
                         onClick={() => handlePreview(service)}
                         className="text-gray-500 hover:text-blue-600 transition"
-                        title="Kart Önizlemesi"
+                        title="Förhandsgranska" // Kart Önizlemesi
                       >
                         <Eye size={20} />
                       </button>
@@ -114,7 +114,7 @@ const AdminServices = () => {
                       <Link
                         to={`/admin/services/edit/${service._id}`}
                         className="text-blue-500 hover:text-blue-700 transition"
-                        title="Düzenle"
+                        title="Redigera" // Düzenle
                       >
                         <Edit size={20} />
                       </Link>
@@ -123,7 +123,7 @@ const AdminServices = () => {
                       <button
                         onClick={() => handleDelete(service._id)}
                         className="text-red-500 hover:text-red-700 transition"
-                        title="Sil"
+                        title="Ta bort" // Sil
                       >
                         <Trash2 size={20} />
                       </button>
@@ -138,7 +138,7 @@ const AdminServices = () => {
                   colSpan="3"
                   className="text-center py-8 text-gray-500 italic"
                 >
-                  Henüz hizmet eklenmemiş.
+                  Inga tjänster har lagts till ännu. {/* Henüz hizmet eklenmemiş. */}
                 </td>
               </tr>
             )}
@@ -151,7 +151,7 @@ const AdminServices = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
           <div className="bg-white rounded-xl shadow-2xl max-w-sm w-full relative overflow-hidden">
             <div className="flex justify-between items-center p-4 border-b">
-              <h3 className="font-bold text-gray-700">Kart Önizlemesi</h3>
+              <h3 className="font-bold text-gray-700">Förhandsgranska Kort</h3> {/* Kart Önizlemesi */}
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="text-gray-500 hover:text-black text-2xl"
@@ -176,7 +176,7 @@ const AdminServices = () => {
                   {previewService.summary}
                 </p>
                 <div className="text-blue-600 font-bold text-sm flex items-center justify-center gap-1 cursor-pointer">
-                  Detaylı Bilgi <ArrowRight size={16} />
+                  Mer Information <ArrowRight size={16} /> {/* Detaylı Bilgi */}
                 </div>
               </div>
             </div>
