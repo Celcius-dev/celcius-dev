@@ -118,7 +118,6 @@ const ContactSection = ({ hideTitle = false }) => {
                 <div className="icon-wrapper">{info.icon}</div>
                 <h3 className="card-title">{info.title}</h3>
                 <p className="card-text">{info.text}</p>
-                <span className="card-subtext">{info.subText}</span>
               </CardWrapper>
             );
           })}
