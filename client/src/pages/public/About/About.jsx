@@ -59,13 +59,6 @@ const About = () => {
       </Helmet>
 
       <div className="about-banner">
-        {/* Arka Plan Resmi */}
-        <img
-          src="https://images.unsplash.com/photo-1700665537650-1bf37979aae0?q=80&w=2072&auto=format&fit=crop"
-          alt="Celsius Team"
-          className="about-banner-bg"
-        />
-
         {/* Karartma Overlay */}
         <div className="about-banner-overlay"></div>
 
