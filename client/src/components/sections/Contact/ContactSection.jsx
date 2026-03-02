@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../api/axios";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useSiteContent } from "../../../context/SiteContentContext";
 import "./ContactSection.css";
 
 const ContactSection = ({ hideTitle = false }) => {
+  const { contact } = useSiteContent();
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -90,11 +92,8 @@ const ContactSection = ({ hideTitle = false }) => {
       <div className="container">
         {!hideTitle && (
           <div className="contact-header">
-            <h2 className="section-title">Kontakta oss</h2> {/* Bize Ulaşın */}
-            <p className="section-subtitle">
-              Vi finns här för att hjälpa dig och ditt husdjur.
-              {/* Size ve evcil dostunuza yardımcı olmak için buradayız */}
-            </p>
+            <h2 className="section-title">{contact.title}</h2>
+            <p className="section-subtitle">{contact.subtitle}</p>
           </div>
         )}
 

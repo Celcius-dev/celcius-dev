@@ -2,8 +2,11 @@ import "./Hero.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import heroVideo from "../../../assets/videos/video.mp4";
+import { useSiteContent } from "../../../context/SiteContentContext";
 
 export default function Hero() {
+  const { hero } = useSiteContent();
+
   return (
     <section className="video-hero">
       {/* Video Arkaplanı */}
@@ -16,17 +19,12 @@ export default function Hero() {
       {/* İçerik Alanı */}
       <div className="container hero-content-container">
         <div className="hero-content">
-          <h1 className="main-hero-title">
-            En modern och kärleksfull plats <br />
-            <span className="text-highlight">för dina små vänner</span>
-          </h1>
+          <h1 className="main-hero-title">{hero.title}</h1>
 
-          <p className="main-hero-desc">
-            Den större kliniken med det varma hjärtat i den lilla
-          </p>
+          <p className="main-hero-desc">{hero.subtitle}</p>
 
           <Link to="/about" className="hero-about-btn">
-            Om oss
+            {hero.buttonText}
           </Link>
         </div>
       </div>

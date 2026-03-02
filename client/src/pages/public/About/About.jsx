@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import api, { UPLOAD_URL } from "../../../api/axios"; // Backend API bağlantısı
+import api, { UPLOAD_URL } from "../../../api/axios";
+import { useSiteContent } from "../../../context/SiteContentContext";
 import "./About.css";
 
 const About = () => {
+  const { about } = useSiteContent();
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -63,16 +65,8 @@ const About = () => {
 
         {/* Yazı İçeriği - GÜNCELLENDİ: HAKKIMIZDA KISMI */}
         <div className="about-banner-content">
-          <h1 className="about-title">
-            Vår filosofi är trygg, <br /> modern och kärleksfull vård
-          </h1>
-          <p className="about-desc">
-            På Celsius Veterinärklinik tar vi hand om hundar och katter med
-            samma värme och engagemang som om de vore våra egna. Vår filosofi är
-            enkel: djur förtjänar trygg, modern och kärleksfull vård. För oss är
-            det viktigt att ha en plats där både djur och djurägare känner sig
-            välkomna och sedda.
-          </p>
+          <h1 className="about-title">{about.bannerTitle}</h1>
+          <p className="about-desc">{about.bannerDesc}</p>
         </div>
       </div>
 
@@ -97,24 +91,8 @@ const About = () => {
               </svg>
             </div>
             {/* BAŞLIK: Vi arbetar för att ge ditt djur... */}
-            <h2 className="vm-title">
-              Vi arbetar för att ge ditt djur ett friskare och lyckligare liv
-            </h2>
-            <div className="vm-text">
-              Vi arbetar för att förbättra livskvaliteten för alla sällskapsdjur
-              genom:
-              {/* Maddeli yapı eklendi */}
-              <ul style={{ paddingLeft: "1.2rem", margin: "1rem 0" }}>
-                <li>förebyggande vård</li>
-                <li>avancerad diagnostik</li>
-                <li>tydliga behandlingsplaner</li>
-                <li>ett öppet och tryggt bemötande</li>
-              </ul>
-              Varje djur och varje ägare ska känna sig delaktig i processen.
-              Därför prioriterar vi transparens, omtanke och lugna möten,
-              oavsett om det gäller en rutinkontroll, en utredning eller ett mer
-              akut problem.
-            </div>
+            <h2 className="vm-title">{about.missionTitle}</h2>
+            <p className="vm-text">{about.missionText}</p>
           </div>
 
           {/* VİZYON - GÜNCELLENDİ */}
@@ -135,19 +113,8 @@ const About = () => {
               </svg>
             </div>
             {/* BAŞLIK: Vi vill vara en plats... */}
-            <h2 className="vm-title">
-              Vi vill vara en plats du och din familj känner er trygga i
-            </h2>
-            <p className="vm-text">
-              Vi strävar efter att vara en veterinärklinik som djurägare tryggt
-              rekommenderar vidare. Med modern teknisk utrustning, ett
-              omtänksamt bemötande och ett kunnigt veterinärteam vill vi sätta
-              en ny standard inom veterinärvård.
-              <br />
-              <br />
-              Målet är att vara en pålitlig, varm och professionell partner
-              genom hela ditt djurs liv.
-            </p>
+            <h2 className="vm-title">{about.visionTitle}</h2>
+            <p className="vm-text">{about.visionText}</p>
           </div>
         </div>
 
@@ -155,16 +122,8 @@ const About = () => {
         <section className="team-section">
           <div className="team-header">
             {/* BAŞLIK: Vårt team består av... */}
-            <h2 className="team-title">
-              Vårt team består av erfarna veterinärer med hjärtat på rätt plats
-            </h2>
-            <p className="team-subtitle">
-              Våra veterinärer och sköterskor arbetar tillsammans för att ge
-              ditt djur bästa möjliga vård – från första undersökningen till
-              sista återbesöket. Teamet brinner för att utvecklas, fördjupa sina
-              kunskaper och ge varje patient den trygga och individuella omsorg
-              den förtjänar.
-            </p>
+            <h2 className="team-title">{about.teamTitle}</h2>
+            <p className="team-subtitle">{about.teamSubtitle}</p>
           </div>
 
           <div className="team-grid">

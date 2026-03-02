@@ -45,6 +45,9 @@ const AdminServicesForm = lazy(() =>
 const PatientList = lazy(() => import("./pages/admin/PatientList"));
 const PatientForm = lazy(() => import("./pages/admin/PatientForm"));
 
+// Site Editörü
+const SiteEditor = lazy(() => import("./pages/admin/SiteEditor"));
+
 // Ayarlar
 const Settings = lazy(() => import("./pages/admin/Settings"));
 
@@ -117,6 +120,9 @@ function App() {
 
             {/* Ayarlar */}
             <Route path="settings" element={<Settings />} />
+
+            {/* Site Editörü */}
+            <Route path="site-editor" element={<SiteEditor />} />
           </Route>
         </Routes>
       </Suspense>

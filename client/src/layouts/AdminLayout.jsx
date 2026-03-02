@@ -7,8 +7,9 @@ import {
   Stethoscope,
   BriefcaseMedical,
   LogOut,
-  Heart, // EKLENDİ: Mutlu Hastalar için
-  Settings, // EKLENDİ: Ayarlar için
+  Heart,
+  Settings,
+  PenSquare,
 } from "lucide-react";
 
 const AdminLayout = () => {
@@ -32,8 +33,9 @@ const AdminLayout = () => {
     },
 
     // --- YENİ EKLENENLER ---
-    { path: "/admin/patients", label: "Lyckliga Patienter", icon: Heart }, // Mutlu Hastalar
-    { path: "/admin/settings", label: "Inställningar", icon: Settings }, // Site Ayarları
+    { path: "/admin/patients", label: "Lyckliga Patienter", icon: Heart },
+    { path: "/admin/settings", label: "Inställningar", icon: Settings },
+    { path: "/admin/site-editor", label: "Site Editörü", icon: PenSquare },
   ];
 
   return (

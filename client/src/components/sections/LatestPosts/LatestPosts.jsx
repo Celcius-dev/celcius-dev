@@ -10,9 +10,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import "./LatestPosts.css"; // CSS Dosyanız
+import "./LatestPosts.css";
+import { useSiteContent } from "../../../context/SiteContentContext";
 
 const LatestPosts = () => {
+  const { blog } = useSiteContent();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -66,10 +68,10 @@ const LatestPosts = () => {
         {/* Başlık Alanı */}
         <div className="section-header text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Senaste blogginlägg och nyheter
+            {blog.title}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Tips från experter rörande djurhälsa, skötsel och näring.
+            {blog.subtitle}
           </p>
         </div>
 
@@ -159,7 +161,7 @@ const LatestPosts = () => {
             to="/blog"
             className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-8 rounded-full transition duration-300"
           >
-            Visa alla blogginlägg och nyheter
+          {blog.viewAllText}
           </Link>
         </div>
       </div>

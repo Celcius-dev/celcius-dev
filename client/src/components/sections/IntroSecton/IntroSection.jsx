@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./IntroSection.css";
-import api from "../../../api/axios"; // Backend API
+import api from "../../../api/axios";
+import { useSiteContent } from "../../../context/SiteContentContext";
 
 export default function IntroSection() {
+  const { intro } = useSiteContent();
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -47,92 +49,27 @@ export default function IntroSection() {
           <div className="intro-badge-row">
             <div className="intro-badge">
               <span className="intro-badge-pulse" />
-              Öppet vardagar 08.00 - 17.00
+              {intro.badge}
             </div>
             <div className="intro-badge-text">
-              Vi erbjuder online bokning, digital patienthistorik och ett
-              modernt diagnossystem
+              {intro.badgeText}
             </div>
           </div>
 
           <h2 className="intro-title">
-            Veterinärvård <br />
-            <span className="highlight">för djurens bästa</span>
+            {intro.title} <br />
+            <span className="highlight">{intro.titleHighlight}</span>
           </h2>
 
           <p className="intro-text">
-            Celcius samlar undersökning, vaccination, kirurgi och
-            laboratorietjänster på ett ställe med ett digitalt journalsystem.
-            Medan du fokuserar på din vän, tar vi hand om hela processen.
+            {intro.text}
           </p>
 
           <div className="intro-actions">
-            <button
-              className="intro-cta-primary"
-              onClick={(e) => e.preventDefault()}
-            >
-              Boka Tid Nu <span>↗</span>
-            </button>
             <button className="intro-cta-secondary" onClick={scrollToServices}>
-              Utforska Våra Tjänster
+              {intro.buttonText}
             </button>
           </div>
-        </div>
-
-        {/* SAĞ TARAF (Dinamik Kart) */}
-        <div className="intro-visual-wrapper">
-          {loading ? (
-            <div className="intro-card flex items-center justify-center min-h-[350px]">
-              <p style={{ color: "var(--color-text-secondary)" }}>
-                Yükleniyor...
-              </p>
-            </div>
-          ) : selectedPatient ? (
-            <div className="intro-card">
-              {/* --- DÜZELTME BURADA YAPILDI --- */}
-              <img
-                src={
-                  selectedPatient.image
-                    ? selectedPatient.image.startsWith("http")
-                      ? selectedPatient.image // Eğer dış linkse (Seed verisi) olduğu gibi kullan
-                      : UPLOAD_URL + selectedPatient.image // Eğer yükleme ise başına url ekle
-                    : "https://placehold.co/200"
-                }
-                alt={selectedPatient.name}
-                className="intro-pet-avatar object-cover"
-              />
-
-              {/* İsim ve Tedavi */}
-              <div className="intro-card-title">
-                {selectedPatient.name} - {selectedPatient.treatment}
-              </div>
-
-              {/* Açıklama */}
-              <div className="intro-card-subtitle">
-                {selectedPatient.age} {selectedPatient.breed},{" "}
-                {selectedPatient.description}
-              </div>
-
-              {/* Etiketler */}
-              <div className="intro-card-tag-list">
-                {selectedPatient.tags.map((tag, index) => (
-                  <span key={index} className="intro-card-tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Footer Bilgileri */}
-              <div className="intro-card-footer">
-                <span>Senaste besök: {selectedPatient.lastVisit}</span>
-                <span>Nästa besök: {selectedPatient.nextVisit}</span>
-              </div>
-            </div>
-          ) : (
-            <div className="intro-card flex items-center justify-center min-h-[350px]">
-              <p>Ingen patient registrerad än.</p>
-            </div>
-          )}
         </div>
       </div>
     </section>

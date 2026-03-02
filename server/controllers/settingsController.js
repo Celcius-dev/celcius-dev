@@ -20,12 +20,15 @@ export const getSettings = async (req, res) => {
 // AYARLARI GÜNCELLE
 export const updateSettings = async (req, res) => {
   try {
-    // İlk bulduğunu güncelle, yoksa yeni oluştur (upsert: true)
-    // new: true -> Güncellenmiş veriyi geri döndür
     const updatedSettings = await SiteSettings.findOneAndUpdate(
-      {}, // Filtre yok, ilkini al
-      req.body, // Gelen veriyi bas
-      { new: true, upsert: true, setDefaultsOnInsert: true }
+      {},
+      { $set: req.body }, // $set ile sadece gelen alanları güncelle
+      {
+        new: true,
+        upsert: true,
+        setDefaultsOnInsert: true,
+        strict: false, // İçerik (content) gibi yeni alanların kaydedilmesine izin ver
+      }
     );
 
     res.status(200).json(updatedSettings);

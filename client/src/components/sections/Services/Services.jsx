@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../../api/axios";
 import { getIconComponent } from "../../../utils/iconHelper";
+import { useSiteContent } from "../../../context/SiteContentContext";
 import "./Services.css";
 
 const Service = () => {
+  const { services: serviceContent } = useSiteContent();
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -63,11 +65,8 @@ const Service = () => {
       <div className="container">
         {/* Bölüm Başlığı */}
         <div className="services-header">
-          <h2 className="section-title">Våra Tjänster</h2>
-          <p className="section-subtitle">
-            Vi erbjuder ett brett utbud av tjänster inom poliklinik, operation,
-            ortopedi, tand, lab och medicin.
-          </p>
+          <h2 className="section-title">{serviceContent.title}</h2>
+          <p className="section-subtitle">{serviceContent.subtitle}</p>
         </div>
 
         {/* Hizmet Kartları Grid */}
