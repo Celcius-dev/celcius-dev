@@ -7,21 +7,39 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Token'i doğrula ve yenile (Refresh Token)
+  const refreshUserToken = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+    try {
+      const res = await api.post("/auth/refresh");
+      localStorage.setItem("token", res.data.token);
+      setUser({ token: res.data.token, ...res.data.user });
+    } catch (error) {
+      // Süresi dolmuşsa veya hatalı token ise localStorage'dan temizle
+      localStorage.removeItem("token");
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (token) {
-          // Token varsa kullanıcı var kabul et
-          setUser({ token });
-        }
-      } catch (error) {
-        localStorage.removeItem("token");
-      } finally {
-        setLoading(false);
+    // Sayfa açıldığında token'ı yenile
+    refreshUserToken();
+
+    // Sürekli açık kalan sayfada her 4 saatte bir (veya belirlediğiniz sürede) token'ı arka planda yenile
+    // Örneğin 4 saat: 4 * 60 * 60 * 1000 = 14400000ms
+    const interval = setInterval(() => {
+      if (localStorage.getItem("token")) {
+        refreshUserToken();
       }
-    };
-    checkUser();
+    }, 14400000); 
+
+    return () => clearInterval(interval);
   }, []);
 
   const login = async (email, password) => {

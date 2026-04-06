@@ -31,3 +31,28 @@ export const login = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Token Yenile (Refresh)
+export const refreshToken = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+    
+    if (!user) {
+      return res.status(404).json({ message: "Användaren hittades inte." });
+    }
+
+    // Token oluştur (Yeniden 1 günlük)
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res
+      .status(200)
+      .json({ token, user: { username: user.username, role: user.role } });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

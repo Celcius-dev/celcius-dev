@@ -24,6 +24,6 @@ export const verifyToken = (req, res, next) => {
     next();
   } catch (error) {
     console.error("JWT Verify Error: ", error.message);
-    res.status(400).json({ message: "Geçersiz Token." });
+    res.status(401).json({ message: "Geçersiz veya süresi dolmuş Token." });
   }
 };
