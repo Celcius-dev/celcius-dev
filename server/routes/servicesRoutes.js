@@ -67,8 +67,10 @@ router.put("/:id", verifyToken, async (req, res) => {
     res.json(updatedService);
   } catch (err) {
     if (err instanceof z.ZodError) {
+      console.error("Zod Validation Error: ", err.errors);
       return res.status(400).json({ errors: err.errors });
     }
+    console.error("PUT /services/:id Error: ", err);
     res.status(500).json({ message: "Ett fel uppstod", error: err });
   }
 });

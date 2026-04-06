@@ -23,6 +23,7 @@ export const verifyToken = (req, res, next) => {
     // 5. Bir sonraki aşamaya geç
     next();
   } catch (error) {
+    console.error("JWT Verify Error: ", error.message);
     res.status(400).json({ message: "Geçersiz Token." });
   }
 };
